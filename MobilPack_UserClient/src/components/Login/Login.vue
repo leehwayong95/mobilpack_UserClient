@@ -1,24 +1,52 @@
 <template>
-    <div class = 'login' id='center'>
-        <div class='loginBox'>
-            <form>
-                <table>
-                    <tr><td><input type="text" class="login_txt" placeholder="ID"/></td></tr>
-                    <tr><td><input type="password" class="login_txt" placeholder="PW"/></td></tr>
-                </table>
-            </form>
-            <div class = 'btn_wrap'>
-                <button type="button" class="login_btn"  v-on:click="routerpush" style="height: 30px; width: 150px">로그인</button>
-            </div>
-        </div>
+  <div class='login' id='container'>
+    <div class='loginBox'>
+      <div class='login_logo'>
+        관광지 추천 페이지
+      </div>
+      <table>
+        <tr><td><input type="text" class="login_txt" placeholder="ID" v-model="id"/></td></tr>
+        <tr><td><input type="password" class="login_txt" placeholder="PW" v-model="pw" v-on:keyup.enter="login"/></td></tr>
+      </table>
+      <div class = 'btn_wrap'>
+        <button type="button" class="login_btn"  v-on:click="login" style="height: 30px; width: 150px">로그인</button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      id: '',
+      pw: ''
+    }
+  },
   methods: {
-    routerpush () {
-      this.$router.push('/main')
+    login () {
+      if (this.id === '' || this.pw === '') {
+        alert('아이디와 비밀번호 모두 입력해주세요.')
+      } else {
+        this.$axios.post('http://localhost:9000/api/user/login', {
+          id: this.id,
+          pw: this.pw
+        })
+          .then((res) => {
+            if (res.data.status) {
+              this.$cookie.set('authorization', res.data['jwt-token'])
+              this.$cookie.set('name', res.data.name)
+              this.$axios.defaults.headers.common['authorization'] = res.data['jwt-token']
+              this.$router.push('/main')
+            } else {
+              alert('등록하신 비밀번호와 일치하지 않습니다.\n확인 후 다시 입력해주세요.')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            alert('개발자가 열심히 일중입니다.\n잠시후 이용부탁드립니다.')
+          })
+      }
     }
   }
 }

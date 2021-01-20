@@ -18,6 +18,8 @@ export default {
       this.$router.push('/' + s)
     },
     Logout () {
+      this.$cookie.delete('authorization')
+      this.$cookie.delete('name')
       this.$router.push('/')
     }
   }

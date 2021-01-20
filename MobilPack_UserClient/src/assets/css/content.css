@@ -1,89 +1,89 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #app {
-    width:100%;
-    height:100%;
+  width: 100%;
+  height: 100%;
 }
 * {
-    font-family: "Noto Sans KR", sans-serif;
-    color: #222;
-    font-size: 14px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #222;
+  font-size: 14px;
 }
 
 .txt_left {
-    text-align: left !important;
+  text-align: left !important;
 }
 
 .txt_right {
-    text-align: right !important;
+  text-align: right !important;
 }
 
 .txt_center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .clr_red {
-    color: #ef3e3e !important;
+  color: #ef3e3e !important;
 }
 
 .clr_blue {
-    color: #3e61dc !important;
+  color: #3e61dc !important;
 }
 
 .clr_gr {
-    color: #46b93d !important;
+  color: #46b93d !important;
 }
 
 .clr_gray {
-    color: #999999 !important;
+  color: #999999 !important;
 }
 
 .fr {
-    float: right;
+  float: right;
 }
 
 .fl {
-    float: left;
+  float: left;
 }
 
 .bgClr_blue {
-    background-color: #3e61dc !important;
+  background-color: #3e61dc !important;
 }
 
 .bgClr_gray {
-    background-color: #a4a5aa !important;
+  background-color: #a4a5aa !important;
 }
 
 .bgClr_red {
-    background-color: #ef3e3e !important;
+  background-color: #ef3e3e !important;
 }
 
 .bdLine_r {
-    border-right: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 
 .none_pd_l {
-    padding-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .ellipsis {
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow: hidden;
 }
 
 textarea {
-    display: block;
-    width: 100%;
-    height: 160px;
-    padding: 10px;
-    margin: 20px 0;
-    border-color: #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    resize: none;
+  display: block;
+  width: 100%;
+  height: 160px;
+  padding: 10px;
+  margin: 20px 0;
+  border-color: #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  resize: none;
 }
 
 input[type="text"],
@@ -91,78 +91,132 @@ input[type="password"],
 input[type="submit"],
 input[type="email"],
 select {
-    width: 100%;
-    height: 30px;
-    padding: 0 10px;
-    border: 0;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 input:disabled {
-    background-color: #ccc;
-    color: #999;
+  background-color: #ccc;
+  color: #999;
 }
 
 input[type="radio"] {
-    width: 20px !important;
-    height: 20px !important;
-    vertical-align: middle;
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle;
 }
 
-input+label {
-    padding-left: 5px;
-    line-height: 40px;
-    vertical-align: middle;
+input + label {
+  padding-left: 5px;
+  line-height: 40px;
+  vertical-align: middle;
 }
 
-input+.swung {
-    display: inline-block;
-    width: 20px;
-    text-align: center;
-    color: #fff;
+input + .swung {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  color: #fff;
 }
 
-td input+.swung {
-    color: #222;
+td input + .swung {
+  color: #222;
 }
 
 input.datepicker {
-    background: #fff url("../images/bg_btn_cal.png") no-repeat 92% 50%;
+  background: #fff url("../images/bg_btn_cal.png") no-repeat 92% 50%;
 }
 
 .input_small {
-    width: 150px !important;
+  width: 150px !important;
 }
 
 hr {
-    border: 0;
-    border-top: 1px solid #ddd;
+  border: 0;
+  border-top: 1px solid #ddd;
 }
 
 button {
-    border: 0;
-    background: #3d4b64;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #fff;
+  border: 0;
+  background: #3d4b64;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
 }
 
 .white_btn {
-    background: #fff;
-    border: 1px solid #ddd;
-    color: #222;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #222;
 }
 
 .refer {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 td .refer {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .blind {
-    display: none;
+  display: none;
+}
+
+/* 로그인 */
+
+.login#container {
+  position: relative;
+  padding: 0;
+  min-width: 0;
+}
+.loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  transform: translate(-50%, -65%);
+}
+.login_logo {
+  text-align: center;
+  font-size: 30px;
+  padding-bottom: 30px;
+}
+.loginBox table {
+  width: 100%;
+  border: 0 !important;
+}
+.loginBox table td {
+  padding: 10px 0 !important;
+  border: 0 !important;
+  text-align: left !important;
+}
+.loginBox .login_tit {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 0.875em;
+  line-height: 1.25em;
+}
+.loginBox .login_btn {
+  color: #fff;
+  cursor: pointer;
+}
+.loginBox .login_txt {
+  line-height: 1.25em;
+}
+.txt_link {
+  text-decoration: underline;
+  color: #3e61dc;
+  cursor: pointer;
+}
+#container {
+  width: 100%;
+  min-width: 1700px;
+  min-height: 100vh;
+  padding: 40px 0 0 250px;
+  background-color: #eee;
 }
