@@ -6,16 +6,22 @@
       </div>
       <table>
         <tr><td><input type="text" class="login_txt" placeholder="ID" v-model="id"/></td></tr>
-        <tr><td><input type="password" class="login_txt" placeholder="PW" v-model="pw" v-on:keyup.enter="login"/></td></tr>
+        <tr><td><input
+          type="password" class="login_txt" placeholder="PW"
+          v-model="pw"
+          v-on:keyup.enter="login"/>
+        </td></tr>
       </table>
       <div class = 'btn_wrap'>
-        <button type="button" class="login_btn"  v-on:click="login" style="height: 30px; width: 150px">로그인</button>
+        <button type="button" class="login_btn"  @click="login">로그인</button>
+        <button type="button" class="login_btn" @click="signin">회원가입</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import modal from '../alert/modal'
 export default {
   data () {
     return {
@@ -39,7 +45,7 @@ export default {
               this.$axios.defaults.headers.common['authorization'] = res.data['jwt-token']
               this.$router.push('/main')
             } else {
-              alert('등록하신 비밀번호와 일치하지 않습니다.\n확인 후 다시 입력해주세요.')
+              this.alert()
             }
           })
           .catch((err) => {
@@ -47,6 +53,21 @@ export default {
             alert('개발자가 열심히 일중입니다.\n잠시후 이용부탁드립니다.')
           })
       }
+    },
+    signin () {
+      this.$router.push('/signin')
+    },
+    alert () {
+      this.$modal.show(modal, {
+        hot_table: 'data',
+        modal: this.$modal
+      },
+      {
+        name: 'dynamic-modal',
+        width: '330px',
+        height: '130px',
+        draggable: true
+      })
     }
   }
 }
