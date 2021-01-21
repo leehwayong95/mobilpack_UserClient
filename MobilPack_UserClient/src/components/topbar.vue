@@ -5,7 +5,7 @@
         <button class="btn" v-on:click="jump('recommands')">추천장소</button>
         <button class="btn"  v-on:click="jump('notice')">공지사항</button>
         <button class="btn"  v-on:click="jump('qna')">문의사항</button>
-        <span  v-on:click="jump('myinfo')">담당자 </span>
+        <span  v-on:click="jump('myinfo')">{{name}}님</span>
         <button class="btn2" @click="Logout">로그아웃</button>
     </div>
   </div >
@@ -15,8 +15,11 @@
 export default {
   data () {
     return {
-      click: false
+      click: false,
+      name: this.$cookie.get('name')
     }
+  },
+  mounted () {
   },
   methods: {
     jump (s) {
