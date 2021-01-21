@@ -58,8 +58,8 @@ select {
 /* 중앙 컨텐츠 영역 */
 #content {
   position: fixed;
-  left: 250px;
-  top: 40px;
+  left: 150px;
+  top: 130px;
   width: calc(100% - 250px);
   height: calc(100% - 40px);
   padding: 0 30px 30px 30px;
@@ -237,7 +237,7 @@ select {
 #content > .cont_inner > p {
   display: block;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 130px;
   height: 60px;
   font-weight: 500;
   font-size: 18px;
@@ -249,6 +249,7 @@ select {
   border-collapse: collapse;
   table-layout: fixed;
   font-size: 14px;
+  margin-top: 30px;
 }
 #content table tr {
   cursor: pointer;
