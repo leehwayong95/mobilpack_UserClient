@@ -204,6 +204,9 @@ td .refer {
 .loginBox .login_btn {
   color: #fff;
   cursor: pointer;
+  height: 30px;
+  width: 150px;
+  margin: 10px 0;
 }
 .loginBox .login_txt {
   line-height: 1.25em;
@@ -219,4 +222,40 @@ td .refer {
   min-height: 100vh;
   padding: 40px 0 0 250px;
   background-color: #eee;
+}
+.button_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Modal Alert Message*/
+#modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#modal > .modal_message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50px;
+  margin: 20px 0px;
+}
+#modal > .modal_message > input {
+  box-shadow: none;
+}
+#modal > .modal_button_wrap {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#modal > .modal_button_wrap > input {
+  height: 30px;
+  width: 150px;
 }

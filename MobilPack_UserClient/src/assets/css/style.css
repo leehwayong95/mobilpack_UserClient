@@ -1,279 +1,278 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-  }
-  /* 입력, 선택부분 통합 설정 */
-  input,
-  select {
-    width: 100%;
-    height: 30px;
-    padding: 0 10px;
-    border: 0;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
-  /* 검색결과 오른쪽 상단 버튼 통합 설정 */
-  .btn_area {
-    position: absolute;
-    top: 20px;
-    right: 30;
-    height: 30px;
-  }
-  .btn_area > button {
-    background-color: #1e7145;
-    border: 0;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #fff;
-    width: auto;
-    height: 30px;
-    padding: 0 15px;
-  }
-  
-  /* 상단 로그인바 */
-  #top {
-    position: fixed;
-    left: 250px;
-    top: 0;
-    width: calc(100% - 250px);
-    height: 40px;
-    background: #e0e2e5;
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    padding-right: 30px;
-  }
-  /* 좌측 메뉴바 */
-  #menu {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #2c3a52;
-  }
-  /* 중앙 컨텐츠 영역 */
-  #content {
-    position: fixed;
-    left: 250px;
-    top: 40px;
-    width: calc(100% - 250px);
-    height: calc(100% - 40px);
-    padding: 0 30px 30px 30px;
-    background: #eee;
-  }
-   /* 요한 가운데 컨텐츠 영역 */
-   #center {
-    position: fixed;
-    left: 40px;
-    top: 130px;
-    width: calc(100% - 80px);
-    height: calc(100% - 100px);
-    padding: 0 30px 30px 30px;
-    background: #eee;
-  }
-  /* 상단 로그인바 세부설정 */
-  #top > span {
-    display: inline-block;
-    line-height: 2.85em;
-    font-weight: 400;
-    margin-right: 10px;
-    font-size: 0.875em;
-    cursor: pointer;
-  }
-  #top > button {
-    border: 0;
-    background: #3d4b64;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 12px;
-    padding: 0 10px;
-    height: 25px;
-  }
-  
-  /* 좌측 메뉴바 세부 설정 */
-  #menu > li {
-    display: block;
-    height: 60px;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  #menu > li.logo {
-    padding-top: 30px;
-    height: 120px;
-    background: #2d2d33;
-    text-align: center;
-    color: #fff;
-    font-size: 30px;
-    line-height: 30px;
-    font-weight: bold;
-  }
-  #menu > li * {
-    cursor: pointer;
-  }
-  #menu > li > span {
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding-left: 30px;
-    color: #fff;
-    line-height: 60px;
-  }
-  #menu > li > span:hover {
-    background: #3e61dc;
-  }
-  #menu > li > ul {
-    display: none;
-    background: #273246;
-  }
-  #menu > li > ul > li {
-    display: block;
-    height: 60px;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  #menu > li > ul > li > span {
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding-left: 30px;
-    color: #fff;
-    line-height: 60px;
-    font-size: 14px;
-  }
-  #menu > li > ul > li > span:hover {
-    color: #3e61dc;
-  }
-  #menu > li > ul > li > span::before {
-    content: "- ";
-  }
-  #menu > li:hover > ul {
-    display: block;
-  }
-  
-  /* 중앙 컨텐츠 영역 세부 설정 */
-  /* 제목부분 */
-  #content > .title {
-    display: block;
-    width: 100%;
-    height: 60px;
-  }
-  #content > .title * {
-    display: inline;
-    font-weight: 400;
-  }
-  #content > .title > h1 {
-    font-size: 28px;
-    color: #222;
-    line-height: 2.67em;
-  }
-  #content > .title > h3 {
-    padding-left: 20px;
-    color: #555;
-    font-size: 14px;
-  }
-  /* /제목부분 */
-  
-  #content > .search {
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 20px;
-    background: #2c3a52;
-    border-radius: 5px;
-  }
-  #content > .search > ul > li {
-    display: inline-block;
-    width: 200px;
-    margin-left: 10px;
-  }
-  #content > .search li:first-child {
-    margin-left: 0;
-  }
-  #content > .search li > span {
-    display: block;
-    padding-bottom: 5px;
-    color: #fff;
-    font-weight: 400;
-    font-size: 15px;
-  }
-  #content > .search li > p.date {
-    width: 400px;
-  }
-  #content > .search li > p.date > input {
-    width: 180px;
-  }
-  #content > .search li > p.date > i {
-    color: #fff;
-    font-style: normal;
-  }
-  #content > .search > button {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    width: 100px;
-    height: 30px;
-    background: #3e61dc;
-    text-align: center;
-    border: 0;
-    cursor: pointer;
-    border-radius: 5px;
-    color: #fff;
-  }
-  
-  #content > .cont_inner {
-    position: relative;
-    min-height: calc(100% - 164px);
-    margin-top: 20px;
-    padding: 0 30px 30px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  #content > .cont_inner > p {
-    display: block;
-    width: 100%;
-    padding-top: 20px;
-    height: 60px;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 2em;
-  }
-  #content table {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 14px;
-  }
-  #content table tr {
-    cursor: pointer;
-  }
-  #content table tr:hover {
-    background: #dce7fa;
-  }
-  #content table th {
-    height: 40px;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    background: #f4f5f6;
-    font-weight: 400;
-    vertical-align: middle;
-    color: #4e5d75;
-    line-height: 1.2em;
-  }
-  #content table td {
-    height: 40px;
-    padding: 0 10px;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    vertical-align: middle;
-    text-align: center;
-    word-break: break-all;
-    line-height: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+/* 입력, 선택부분 통합 설정 */
+input,
+select {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+/* 검색결과 오른쪽 상단 버튼 통합 설정 */
+.btn_area {
+  position: absolute;
+  top: 20px;
+  right: 30;
+  height: 30px;
+}
+.btn_area > button {
+  background-color: #1e7145;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  width: auto;
+  height: 30px;
+  padding: 0 15px;
+}
+
+/* 상단 로그인바 */
+#top {
+  position: fixed;
+  left: 250px;
+  top: 0;
+  width: calc(100% - 250px);
+  height: 40px;
+  background: #e0e2e5;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  padding-right: 30px;
+}
+/* 좌측 메뉴바 */
+#menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background: #2c3a52;
+}
+/* 중앙 컨텐츠 영역 */
+#content {
+  position: fixed;
+  left: 250px;
+  top: 40px;
+  width: calc(100% - 250px);
+  height: calc(100% - 40px);
+  padding: 0 30px 30px 30px;
+  background: #eee;
+}
+/* 요한 가운데 컨텐츠 영역 */
+#center {
+  position: fixed;
+  left: 40px;
+  top: 130px;
+  width: calc(100% - 80px);
+  height: calc(100% - 100px);
+  padding: 0 30px 30px 30px;
+  background: #eee;
+}
+/* 상단 로그인바 세부설정 */
+#top > span {
+  display: inline-block;
+  line-height: 2.85em;
+  font-weight: 400;
+  margin-right: 10px;
+  font-size: 0.875em;
+  cursor: pointer;
+}
+#top > button {
+  border: 0;
+  background: #3d4b64;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  padding: 0 10px;
+  height: 25px;
+}
+
+/* 좌측 메뉴바 세부 설정 */
+#menu > li {
+  display: block;
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+#menu > li.logo {
+  padding-top: 30px;
+  height: 120px;
+  background: #2d2d33;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: bold;
+}
+#menu > li * {
+  cursor: pointer;
+}
+#menu > li > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-left: 30px;
+  color: #fff;
+  line-height: 60px;
+}
+#menu > li > span:hover {
+  background: #3e61dc;
+}
+#menu > li > ul {
+  display: none;
+  background: #273246;
+}
+#menu > li > ul > li {
+  display: block;
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+#menu > li > ul > li > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-left: 30px;
+  color: #fff;
+  line-height: 60px;
+  font-size: 14px;
+}
+#menu > li > ul > li > span:hover {
+  color: #3e61dc;
+}
+#menu > li > ul > li > span::before {
+  content: "- ";
+}
+#menu > li:hover > ul {
+  display: block;
+}
+
+/* 중앙 컨텐츠 영역 세부 설정 */
+/* 제목부분 */
+#content > .title {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+#content > .title * {
+  display: inline;
+  font-weight: 400;
+}
+#content > .title > h1 {
+  font-size: 28px;
+  color: #222;
+  line-height: 2.67em;
+}
+#content > .title > h3 {
+  padding-left: 20px;
+  color: #555;
+  font-size: 14px;
+}
+/* /제목부분 */
+
+#content > .search {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  background: #2c3a52;
+  border-radius: 5px;
+}
+#content > .search > ul > li {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10px;
+}
+#content > .search li:first-child {
+  margin-left: 0;
+}
+#content > .search li > span {
+  display: block;
+  padding-bottom: 5px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}
+#content > .search li > p.date {
+  width: 400px;
+}
+#content > .search li > p.date > input {
+  width: 180px;
+}
+#content > .search li > p.date > i {
+  color: #fff;
+  font-style: normal;
+}
+#content > .search > button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 100px;
+  height: 30px;
+  background: #3e61dc;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+}
+
+#content > .cont_inner {
+  position: relative;
+  min-height: calc(100% - 164px);
+  margin-top: 20px;
+  padding: 0 30px 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+#content > .cont_inner > p {
+  display: block;
+  width: 100%;
+  padding-top: 20px;
+  height: 60px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 2em;
+}
+#content table {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+#content table tr {
+  cursor: pointer;
+}
+#content table tr:hover {
+  background: #dce7fa;
+}
+#content table th {
+  height: 40px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  background: #f4f5f6;
+  font-weight: 400;
+  vertical-align: middle;
+  color: #4e5d75;
+  line-height: 1.2em;
+}
+#content table td {
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  vertical-align: middle;
+  text-align: center;
+  word-break: break-all;
+  line-height: 20px;
+}

@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login/Login'
+import Signin from '@/components/Login/Signin'
 import topbar from '@/components/topbar'
 import Notice from '@/components/Notice/Notice'
 import recommands from '@/components/Recommand/List'
 import infoedit from '@/components/My/info'
 import Qna from '@/components/Qna/QnaList'
+
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin
     },
     {
       path: '/main',
