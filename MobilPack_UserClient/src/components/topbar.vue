@@ -59,23 +59,12 @@ export default {
     height: 30px;
     margin-left: 10px;
 }
-.yellow {
-    background-color: rgb(224, 247, 25);
-    width: 30px;
-    height: 30px;
-}
-.blue {
-    width: 30px;
-    height: 30px;
-    background-color: blue;
-}
 .srch_box {
      /* flex, justify-content, align-items:공부 필요합니다 */
     position: relative;
     width: 100%;
     padding: 20px;
     background: #2c3a52;
-    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,52 +72,5 @@ export default {
 .manu span {
     font-size: 20px;
     color: #fff;
-}
-#top{
-    position:fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 80px;
-    background:#273246;
-    padding: 0 40px;
-    display:flex;
-    justify-content: space-between;
-    color: #fff;
-}
-#top>h1{
-    margin-top: 10px;
-    display:block;
-    height:100%;
-    font-size: 20px;
-    text-align: center;
-    line-height:28px;
-}
-#top .menu > *{
-    display: inline-block;
-}
-#top .menu > ul{
-    margin-right: 20px;
-}
-#top .menu > ul > li{
-    height:100%;
-    padding: 20px 30px;
-    line-height: 40px;
-    display: inline-block;
-    cursor: pointer;
-}
-#top .menu > ul > li:hover{
-    background: #3a4861;
-}
-#top .menu > span{
-    font-size: 13px;
-}
-#top .menu >button{
-    border: 1px solid black;
-    padding: 0 10px;
-    border-radius: 4px;
-    height: 24px;
-    margin-left: 10px;
-    cursor: pointer;
 }
 </style>
