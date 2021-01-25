@@ -117,7 +117,7 @@ export default {
         check: this.checkEmail
       }
       let message = {
-        input_name: '이름을 채워주세요.',
+        input_name: '이름을 입력해주세요',
         input_phone: '휴대폰 번호를 입력해주세요.',
         input_email: '이메일을 입력해주세요.',
         check: '이메일 중복확인을 해주세요.'
