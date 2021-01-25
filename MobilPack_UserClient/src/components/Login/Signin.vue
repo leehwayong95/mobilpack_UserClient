@@ -67,6 +67,10 @@ export default {
     }
   },
   watch: {
+    // 입력방지
+    // id : 영문, 골뱅이, '.'문자만 허용
+    // pw : 영문, 숫자
+    // phone : 12글자, 숫자
     id () {
       if (!this.check) {
         this.id = this.id.replace(/[^A-Za-z0-9@._+]/g, '')
@@ -120,6 +124,7 @@ export default {
           break
         }
       }
+      // 휴대폰 번호 정규식 검사 (위 리스트 점검 반복문을 통과했을 때)
       if (checkingItem && !this.phoneCheck(this.phone)) {
         alert('휴대폰 번호가 올바르지 않습니다.\n다시 입력 해주세요')
         checkingItem = false
@@ -154,12 +159,14 @@ export default {
         document.getElementById('signin_id').focus()
         // 공백입력시 아이디 입력칸 focus
       } else {
+        // 정규식 검사 메서드
         if (this.emailCheck(this.id)) {
           // 중복확인 요청
           this.$axios.post('http://localhost:9000/api/user/check', {
             id: this.id
           })
             .then((res) => {
+              console.log(res.data)
               if (res.data.status) {
                 this.check = true
                 // 중복 확인 flag 활성화
@@ -194,7 +201,7 @@ export default {
       var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/
       return regExp.test(asPhone)
     },
-    pwCheck () {
+    pwCheck () { // 비밀번호는 검사가 필요한지 모르겠음.
     }
   }
 }
