@@ -1,6 +1,7 @@
 # mobilepack_userclient
 
 > A Vue.js project
+> 2020.01.25 : Login and Signin Module Merge
 
 ## Build Setup
 
