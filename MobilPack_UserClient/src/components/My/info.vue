@@ -39,6 +39,23 @@ export default {
   mounted () {
     this.getinfo()
   },
+  watch: {
+    // 입력방지
+    // id : 영문, 골뱅이, '.'문자만 허용
+    // pw : 영문, 숫자
+    // phone : 12글자, 숫자
+    email () {
+      if (!this.checkEmail) {
+        this.email = this.email.replace(/[^A-Za-z0-9@._+]/g, '')
+      }
+    },
+    name () {
+      this.name = this.name.replace(/[^ㄱ-ㅎ가-힣+]/g, '')
+    },
+    phone () {
+      this.phone = this.phone.replace(/[^0-9+]/g, '')
+    }
+  },
   methods: {
     // 사용자 정보 수정 메서드
     updateinfo () {
@@ -50,7 +67,13 @@ export default {
         })
           .then((res) => {
             alert('정보 수정 완료')
-            this.$router.push('/main')
+            if (this.original !== this.email) { // 아이디를 수정했을 때
+              alert('바꾼 아이디로 로그인 해주세요')
+              this.$router.push('/')
+            } else { // 아이디를 수정하지 않았을 때
+              // main으로 가는게 맞는거 같은데 token 정보가 바뀌지않아서 다시 로그인
+              this.$router.push('/')
+            }
           })
           .catch((err) => { // 토큰 expired 일 때
             console.log(err)

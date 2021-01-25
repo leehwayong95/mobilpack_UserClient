@@ -83,7 +83,7 @@ export default {
       this.name = this.name.replace(/[^ㄱ-ㅎ가-힣+]/g, '')
     },
     phone () {
-      this.phone = this.phone.replace(/[^0-9+]{12}/g, '')
+      this.phone = this.phone.replace(/[^0-9+]/g, '')
     }
   },
   methods: {
