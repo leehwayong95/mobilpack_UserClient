@@ -16,7 +16,7 @@
             <th><input type="text" placeholder="name" id="input_email" v-model="email"><button id='check' @click="checkconfirm">중복확인</button></th>
           </tr>
           <tr>비밀번호
-            <th><button class="pwedit" >비밀번호 변경</button></th>
+            <th><button class="pwedit" @click="pwupdate">비밀번호 변경</button></th>
           </tr>
         </table>
         <button class="infoupdate" @click="updateinfo">저 장</button>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import editPwModal from '../alert/pwupdateModal'
 export default {
   data () {
     return {
@@ -72,6 +73,7 @@ export default {
               this.$router.push('/')
             } else { // 아이디를 수정하지 않았을 때
               // main으로 가는게 맞는거 같은데 token 정보가 바뀌지않아서 다시 로그인
+              this.$cookie.set('name', this.name) // 쿠키 변경해도 새로고침이 필요. 조금더 고민
               this.$router.push('/')
             }
           })
@@ -175,6 +177,18 @@ export default {
     phoneCheck (asPhone) {
       var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/
       return regExp.test(asPhone)
+    },
+    pwupdate () {
+      this.$modal.show(editPwModal, {
+        hot_table: 'data',
+        modal: this.$modal
+      },
+      {
+        name: 'dynamic-modal',
+        width: '330px',
+        height: '130px',
+        draggable: true
+      })
     }
   }
 }
