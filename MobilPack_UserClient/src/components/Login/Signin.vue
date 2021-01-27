@@ -26,7 +26,7 @@
         <tr><td><input type="text" placeholder="이름" v-model="name" id='signin_name'/></td></tr>
         <tr><td><input type="text" placeholder="전화번호" v-model="phone" id='signin_phone'/></td></tr>
         <tr><td>
-          <select id="signin_contry" name="contry" v-model="contry">
+          <select id="signin_country" name="country" v-model="country">
           <option value="">국가 선택</option>
           <option value="KR">대한민국</option>
           <option value="US">미국</option>
@@ -60,7 +60,7 @@ export default {
       confirmpw: '',
       name: '',
       phone: '',
-      contry: '',
+      country: '',
       allagree: false,
       serviceagree: false,
       infomationagree: false
@@ -97,7 +97,7 @@ export default {
         signin_confirm: this.confirmpw,
         signin_name: this.name,
         signin_phone: this.phone,
-        signin_contry: this.contry,
+        signin_country: this.country,
         service_agree: this.serviceagree,
         info_agree: this.infomationagree
       }
@@ -109,7 +109,7 @@ export default {
         signin_confirm: '확인비밀번호가 다릅니다',
         signin_name: '이름을 입력해주세요',
         signin_phone: '전화번호를 입력해주세요',
-        signin_contry: '거주나라를 선택해주세요',
+        signin_country: '거주나라를 선택해주세요',
         service_agree: '서비스 이용 약관에 동의해주세요',
         info_agree: '개인 정보 처리방침에 동의해주세요'
       }
@@ -135,7 +135,7 @@ export default {
           password: this.pw,
           name: this.name,
           phone: this.phone,
-          contry: this.contry
+          country: this.country
         }
         // 회원가입 요청
         this.$axios.post('http://localhost:9000/api/user/signin', signinItem)
