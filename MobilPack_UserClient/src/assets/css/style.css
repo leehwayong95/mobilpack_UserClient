@@ -277,3 +277,154 @@ select {
   word-break: break-all;
   line-height: 20px;
 }
+
+/*Qna List*/
+#center > .cont_inner {
+  position: relative;
+  min-height: calc(100% - 164px);
+  margin-top: 20px;
+  padding: 0 30px 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+#center > .cont_inner > p {
+  display: block;
+  width: 100%;
+  padding-top: 30px;
+  height: 60px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 2em;
+}
+#center > .title {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+#center > .title * {
+  display: inline;
+  font-weight: 400;
+}
+#center > .title > h1 {
+  font-size: 28px;
+  color: #222;
+  line-height: 2.67em;
+}
+#center > .title > h3 {
+  padding-left: 20px;
+  color: #555;
+  font-size: 14px;
+}
+#center > .search {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  background: #2c3a52;
+  border-radius: 5px;
+}
+#center > .search > ul > li {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10px;
+}
+#center > .search > ul > li.date {
+  width: 370px;
+}
+#center > .search li:first-child {
+  margin-left: 0;
+}
+#center > .search li > span {
+  display: block;
+  padding-bottom: 5px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}
+#center > .search li > p.date {
+  width: 400px;
+}
+#center > .search li > p.date > input {
+  width: 180px;
+}
+#center > .search li > p.date > i {
+  color: #fff;
+  font-style: normal;
+}
+#center > .search > button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 100px;
+  height: 30px;
+  background: #3e61dc;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+}
+#center table {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+  margin-top: 10px;
+}
+#center table tr {
+  cursor: pointer;
+}
+#center table tr:hover {
+  background: #dce7fa;
+}
+#center table th {
+  height: 40px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  background: #f4f5f6;
+  font-weight: 400;
+  vertical-align: middle;
+  color: #4e5d75;
+  line-height: 1.2em;
+}
+#center table td {
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  vertical-align: middle;
+  text-align: center;
+  word-break: break-all;
+  line-height: 20px;
+}
+#center > .writeQna {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+#center > .writeQna button {
+  height: 30px;
+  width: 100px;
+}
+.cont_inner > table > tr > td > input.content {
+  height: 500px;
+}
+
+.cont_inner > .btn_wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.cont_inner > .btn_wrap > button {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+}
+.cont_inner > .btn_wrap > button.cancel {
+  background-color: #777;
+}

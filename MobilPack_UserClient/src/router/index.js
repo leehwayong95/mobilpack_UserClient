@@ -7,6 +7,7 @@ import Notice from '@/components/Notice/Notice'
 import recommands from '@/components/Recommand/List'
 import infoedit from '@/components/My/info'
 import Qna from '@/components/Qna/QnaList'
+import WriteQna from '@/components/Qna/WriteQna'
 
 Vue.use(Router)
 
@@ -51,6 +52,14 @@ export default new Router({
       name: 'Qna',
       components: {
         default: Qna,
+        top: topbar
+      }
+    },
+    {
+      path: '/qna/write',
+      name: 'writeQna',
+      components: {
+        default: WriteQna,
         top: topbar
       }
     },
