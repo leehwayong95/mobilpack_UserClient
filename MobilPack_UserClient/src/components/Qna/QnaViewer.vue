@@ -40,7 +40,7 @@
         <div class="btn_list">
           <button @click="goList">목록</button>
         </div>
-        <div class="btn_crud">
+        <div class="btn_crud" v-if="permission">
           <button class="btn_delete">문의 수정</button>
           <button @click="setDelete">문의 삭제</button>
         </div>
@@ -54,6 +54,7 @@ export default {
   data () {
     return {
       qnaindex: null,
+      permission: false,
       data: ''
     }
   },
@@ -70,6 +71,7 @@ export default {
             this.$router.push('/qna')
           } else {
             this.data = res.data.QnaPostModel
+            this.permission = res.data.permission
           }
         })
         .catch((err) => {
@@ -81,7 +83,17 @@ export default {
       this.$router.push('/qna')
     },
     setDelete () {
-      confirm(this.qnaindex + '해당 문의를 삭제하시겠습니까?')
+      if (confirm('해당 문의를 삭제하시겠습니까?')) {
+        this.$axios.delete('http://localhost:9000/api/qna/' + this.qnaindex)
+          .then((res) => {
+            alert('삭제되었습니다.')
+            this.$router.push('/qna')
+          })
+          .catch((err) => {
+            console.log(err)
+            alert('잘못된 요청입니다.')
+          })
+      }
     }
   }
 }
