@@ -41,7 +41,7 @@
           <button @click="goList">목록</button>
         </div>
         <div class="btn_crud" v-if="permission">
-          <button class="btn_delete">문의 수정</button>
+          <button class="btn_delete" @click="setUpdate">문의 수정</button>
           <button @click="setDelete">문의 삭제</button>
         </div>
       </div>
@@ -76,7 +76,8 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          alert('열심히 개발자가 일중입니다.\n나중에 다시 시도해주세요.')
+          alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+          this.$router.push('/')
         })
     },
     goList () {
@@ -94,6 +95,9 @@ export default {
             alert('잘못된 요청입니다.')
           })
       }
+    },
+    setUpdate () {
+      this.$router.push({name: 'editQna', params: {data: this.data}})
     }
   }
 }

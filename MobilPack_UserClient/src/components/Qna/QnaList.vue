@@ -123,7 +123,7 @@ export default {
         })
     },
     writeQna () {
-      this.$router.push('/qna/write')
+      this.$router.push('/write')
     },
     view (n) {
       this.$router.push('/qna/' + n)

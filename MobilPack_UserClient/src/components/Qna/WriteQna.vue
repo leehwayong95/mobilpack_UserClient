@@ -28,7 +28,8 @@
       </table>
       <div class="btn_wrap">
         <button class="cancel" @click="cancel">취소</button>
-        <button class="save" @click="writeQna">등록</button>
+        <button class="save" @click="editQna" v-if="edit">수정</button>
+        <button class="save" @click="writeQna" v-else>등록</button>
       </div>
     </div>
   </div>
@@ -40,12 +41,20 @@ export default {
     return {
       category: '',
       title: '',
-      content: ''
+      content: '',
+      edit: false
     }
   },
   mounted () {
     if (this.$axios.defaults.headers.common['authorization'] === undefined || this.$axios.defaults.headers.common['authorization'] === null) {
       this.$axios.defaults.headers.common['authorization'] = this.$cookie.get('authorization')
+    }
+    if (this.$route.name === 'editQna') {
+      let data = this.$route.params.data
+      this.category = data.category
+      this.title = data.title
+      this.content = data.content
+      this.edit = true
     }
   },
   methods: {
@@ -67,6 +76,21 @@ export default {
         .catch((err) => {
           console.log(err)
           alert('개발자가 열심히 일을 하고 있습니다.\n잠시 후 시도해주세요')
+        })
+    },
+    editQna () {
+      this.$axios.put('http://localhost:9000/api/qna/' + this.$route.params.index, {
+        category: this.category,
+        title: this.title,
+        content: this.content
+      })
+        .then((res) => {
+          alert('수정되었습니다.')
+          this.$router.push('/qna/' + this.$route.params.index)
+        })
+        .catch((err) => {
+          console.log(err)
+          alert('잘못된 요청입니다.')
         })
     }
   }

@@ -65,12 +65,21 @@ export default new Router({
       }
     },
     {
-      path: '/qna/write',
+      path: '/write',
       name: 'writeQna',
       components: {
         default: WriteQna,
         top: topbar
       }
+    },
+    {
+      path: '/edit/:index',
+      name: 'editQna',
+      components: {
+        default: WriteQna,
+        top: topbar
+      },
+      pros: true
     },
     {
       path: '/myinfo',
