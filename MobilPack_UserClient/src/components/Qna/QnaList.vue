@@ -65,7 +65,7 @@
           <th scope="col">답변자</th>
           <th scope="col">답변 일시</th>
         </tr>
-        <tr v-for="(post,index) in List" v-bind:key="index">
+        <tr v-for="(post,index) in List" v-bind:key="index" @click="view(post.qnaindex)">
           <td>{{((page-1) * 20) + (index+1)}}</td>
             <td v-if="post.category == 1">이용</td>
             <td v-else-if="post.category == 2">오류</td>
@@ -116,7 +116,6 @@ export default {
           this.List = res.data.list
           this.endpage = res.data.count / 20
           this.endpage += (res.data.count % 20) ? 1 : 0
-          console.log(res.data.count)
         })
         .catch((err) => {
           console.log(err)
@@ -125,7 +124,16 @@ export default {
     },
     writeQna () {
       this.$router.push('/qna/write')
+    },
+    view (n) {
+      this.$router.push('/qna/' + n)
     }
   }
 }
 </script>
+
+<style scoped>
+#center {
+  overflow: auto;
+}
+</style>
