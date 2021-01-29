@@ -80,6 +80,14 @@
             <td v-else>{{post.replydate}}</td>
         </tr>
       </table>
+      <div class="paging">
+        <a class ="pagingFirst"  @click="getNextBeforePage('0')"/>
+          <ul v-for="(n,index) in paging()" v-bind:key="index" @click="getPage(n)">
+            <li  v-if="page !== n" class = "Nothere">{{n}}</li>
+            <li v-else class="here">{{n}}</li>
+          </ul>
+        <a class="pagingLast" @click="getNextBeforePage('1')"/>
+      </div>
     </div>
   </div>
 </template>
@@ -95,7 +103,14 @@ export default {
       max: '',
       answer: '',
       page: 1,
-      endpage: null
+      endpage: null,
+      paging: function () {
+        var pagenumber = []
+        for (var i = 1; i <= this.endpage; i++) {
+          pagenumber.push(i)
+        }
+        return pagenumber
+      }
     }
   },
   mounted () {
@@ -127,6 +142,20 @@ export default {
     },
     view (n) {
       this.$router.push('/qna/' + n)
+    },
+    getPage (n) {
+      if (this.currentpage !== n) {
+        this.currentpage = n
+        this.getUserList()
+      }
+    },
+    getNextBeforePage (n) {
+      if (n === '0' && this.currentpage > 1) {
+        this.currentpage--
+      } else if (n === '1' && this.currentpage < this.endpage) {
+        this.currentpage++
+      }
+      this.getUserList()
     }
   }
 }
@@ -135,5 +164,9 @@ export default {
 <style scoped>
 #center {
   overflow: auto;
+}
+.here {
+  background-color: #3e61dc;
+  color: #fff;
 }
 </style>

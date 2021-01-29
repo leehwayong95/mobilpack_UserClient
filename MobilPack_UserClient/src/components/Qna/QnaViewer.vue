@@ -1,8 +1,8 @@
 <template>
   <div id="center">
     <div class="title">
-      <h1>문의내용</h1>
-      <h3>home > 문의목록</h3>
+      <h1>| 문의내용</h1>
+      <h3>home > 문의목록 > 문의내용</h3>
     </div>
     <div class="cont_inner">
       <table style ="margin-top: 30px">
