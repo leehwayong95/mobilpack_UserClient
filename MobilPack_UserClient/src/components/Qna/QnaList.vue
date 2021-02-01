@@ -4,7 +4,7 @@
       <h1>| 문의목록</h1>
       <h3>home > 문의목록</h3>
     </div>
-    <div class="search">
+    <div class="search" style="margin: 10px 0;">
       <ul>
         <li>
           <span>문의 유형</span>
@@ -111,6 +111,14 @@ export default {
   },
   mounted () {
     this.getList()
+  },
+  watch: {
+    max () {
+      if (this.min > this.max) {
+        alert('최소일 보다 커야합니다.')
+        this.max = this.min + 1
+      }
+    }
   },
   methods: {
     getList () {
