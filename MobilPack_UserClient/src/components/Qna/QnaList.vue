@@ -68,11 +68,12 @@
             <td v-else-if="post.category == 3">기타</td>
           <td>{{post.title}}</td>
           <td>{{post.createat}}</td>
-            <td v-if="post['admin_name'] == null">답변대기</td>
+            <td v-if="post.replydate == null">답변대기</td>
             <td v-else>답변완료</td>
-            <td v-if="post['admin_name'] == null"> - </td>
+            <td v-if="(post['admin_name'] == null ) && (post.replydate == null)"> - </td>
+            <td v-else-if="(post['admin_name'] == null) && (post.replydate != null)"> 삭제된 관리자 </td>
             <td v-else>{{post['admin_name']}}</td>
-            <td v-if="post['admin_name'] == null"> -</td>
+            <td v-if="post.replydate == null"> -</td>
             <td v-else>{{post.replydate}}</td>
         </tr>
       </table>
