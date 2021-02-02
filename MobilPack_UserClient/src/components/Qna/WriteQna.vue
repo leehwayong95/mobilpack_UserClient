@@ -13,7 +13,7 @@
         <tr>
           <th>문의유형</th>
           <td>
-            <select v-model="category">
+            <select v-model="category" id="category">
               <option value="">선택해주세요</option>
               <option value="1">이용</option>
               <option value="2">오류</option>
@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" v-model="title"></td>
+          <td><input type="text" v-model="title" id="title"></td>
         </tr>
         <tr>
           <th>내용</th>
-          <td><input type="text" class="content" v-model="content"></td>
+          <td><input type="text" class="content" v-model="content" id="input_Q"></td>
         </tr>
       </table>
       <div class="btn_wrap">
@@ -68,19 +68,30 @@ export default {
       }
     },
     writeQna () {
-      this.$axios.post('http://localhost:9000/api/qna/', {
-        category: this.category,
-        title: this.title,
-        content: this.content
-      })
-        .then((res) => {
-          alert('등록하였습니다.')
-          this.$router.push('/qna')
+      if (this.category === '') {
+        alert('문의 유형을 선택해주세요')
+        document.getElementById('category').focus()
+      } else if (this.title === '') {
+        alert('제목을 입력해주세요')
+        document.getElementById('title').focus()
+      } else if (this.content === '') {
+        alert('문의사항을 입력해주세요')
+        document.getElementById('input_Q').focus()
+      } else {
+        this.$axios.post('http://localhost:9000/api/qna/', {
+          category: this.category,
+          title: this.title,
+          content: this.content
         })
-        .catch((err) => {
-          console.log(err)
-          alert('개발자가 열심히 일을 하고 있습니다.\n잠시 후 시도해주세요')
-        })
+          .then((res) => {
+            alert('등록하였습니다.')
+            this.$router.push('/qna')
+          })
+          .catch((err) => {
+            console.log(err)
+            alert('개발자가 열심히 일을 하고 있습니다.\n잠시 후 시도해주세요')
+          })
+      }
     },
     editQna () {
       this.$axios.put('http://localhost:9000/api/qna/' + this.$route.params.index, {
