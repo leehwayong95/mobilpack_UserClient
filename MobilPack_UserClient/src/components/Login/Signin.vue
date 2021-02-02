@@ -20,6 +20,7 @@
           <input
           type="password" class="login_txt" placeholder="비밀번호 확인"
           v-model="confirmpw" id='signin_confirm'/>
+          <h3 style="color: red;" v-if="(pw !== confirmpw) && (confirmpw !== '')">비밀번호가 일치하지않습니다</h3>
         </td></tr>
       </table>
       <table>
