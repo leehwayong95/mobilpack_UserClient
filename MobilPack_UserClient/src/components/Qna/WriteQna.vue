@@ -89,7 +89,8 @@ export default {
           })
           .catch((err) => {
             console.log(err)
-            alert('개발자가 열심히 일을 하고 있습니다.\n잠시 후 시도해주세요')
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+            this.$router.push('/')
           })
       }
     },
@@ -105,7 +106,8 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          alert('잘못된 요청입니다.')
+          alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+          this.$router.push('/')
         })
     }
   }
