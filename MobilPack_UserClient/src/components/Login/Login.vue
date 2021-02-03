@@ -41,7 +41,7 @@ export default {
           .then((res) => {
             if (res.data.status) {
               this.$cookie.set('authorization', res.data['jwt-token'])
-              this.$cookie.set('name', res.data.name)
+              this.$cookie.set('user_name', res.data.name)
               this.$axios.defaults.headers.common['authorization'] = res.data['jwt-token']
               this.$router.push('/main')
             } else {

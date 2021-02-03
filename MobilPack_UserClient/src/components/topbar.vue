@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       click: false,
-      name: this.$cookie.get('name')
+      name: this.$cookie.get('user_name')
     }
   },
   mounted () {
@@ -28,7 +28,7 @@ export default {
     },
     Logout () {
       this.$cookie.delete('authorization')
-      this.$cookie.delete('name')
+      this.$cookie.delete('user_name')
       this.$router.push('/')
     }
   }
