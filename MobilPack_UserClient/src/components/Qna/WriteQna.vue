@@ -27,7 +27,7 @@
         </tr>
         <tr>
           <th>내용</th>
-          <td><input type="text" class="content" v-model="content" id="input_Q"></td>
+          <td><textarea type="text" class="content" v-model="content" id="input_Q"/></td>
         </tr>
       </table>
       <div class="btn_wrap">
