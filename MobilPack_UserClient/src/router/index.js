@@ -4,6 +4,7 @@ import Login from '@/components/Login/Login'
 import Signin from '@/components/Login/Signin'
 import topbar from '@/components/topbar'
 import Notice from '@/components/Notice/Notice'
+import Details from '@/components/Notice/Details'
 import recommands from '@/components/Recommand/List'
 import infoedit from '@/components/My/info'
 import Qna from '@/components/Qna/QnaList'
@@ -37,6 +38,14 @@ export default new Router({
       name: 'Notice',
       components: {
         default: Notice,
+        top: topbar
+      }
+    },
+    {
+      path: '/details',
+      name: 'Details',
+      components: {
+        default: Details,
         top: topbar
       }
     },
