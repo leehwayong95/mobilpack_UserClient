@@ -18,7 +18,7 @@
              <tr>
              <th >공지노출 구분</th><!-- colspan 뒤에 붙는 숫자는 테이블의 항목수입니다 -->
              <td class="left" v-if= "'1'=== items.topsetting" colspan="7">중요공지</td><!-- ex> colspan5는 5개가 (항목이)합쳐진 크기라고 보면됨  -->
-             <td class="left" v-else colspan="5">일반공지</td>
+             <td class="left" v-else colspan="7">일반공지</td>
              </tr>
              <tr>
              <th>제목</th>
