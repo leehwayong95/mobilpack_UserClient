@@ -10,9 +10,12 @@ import Qna from '@/components/Qna/QnaList'
 import WriteQna from '@/components/Qna/WriteQna'
 import QnaViewer from '@/components/Qna/QnaViewer'
 
+import VueCookie from 'vue-cookie'
+import axios from 'axios'
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -30,6 +33,9 @@ export default new Router({
       name: 'admin',
       components: {
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -91,3 +97,16 @@ export default new Router({
     }
   ]
 })
+
+function checklogin (to, from, next) {
+  let token = VueCookie.get('authorization')
+  if (token === '' || token === null) {
+    alert('로그인이 필요한 기능입니다.')
+    next('/')
+  } else {
+    axios.defaults.headers.common['authorization'] = token
+    next()
+  }
+}
+
+export default router
