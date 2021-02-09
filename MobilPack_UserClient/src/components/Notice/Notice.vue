@@ -7,10 +7,10 @@
       <ul>
          <li>
          <span>제목</span>
-         <input type="text" style = "width:1000px" v-model="title">
+         <input type="text" style = "width:1000px" v-model="title" v-on:keyup.enter="search">
          </li>
       </ul>
-      <button v-on:click="search">검색</button>
+      <button  @click="search" >검색</button>
     </div>
     <div>
       <div class="cont_inner">

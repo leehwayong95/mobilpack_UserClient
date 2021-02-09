@@ -17,12 +17,12 @@
          <tbody>
              <tr>
              <th >공지노출 구분</th><!-- colspan 뒤에 붙는 숫자는 테이블의 항목수입니다 -->
-             <td class="left" v-if= "'1'=== items.topsetting" colspan="7">중요공지</td><!-- ex> colspan5는 5개가 (항목이)합쳐진 크기라고 보면됨  -->
-             <td class="left" v-else colspan="7">일반공지</td>
+             <td v-if= "'1'=== items.topsetting" colspan="7">중요공지</td><!-- ex> colspan5는 5개가 (항목이)합쳐진 크기라고 보면됨  -->
+             <td v-else colspan="7">일반공지</td>
              </tr>
              <tr>
              <th>제목</th>
-             <td class="left" colspan="7">{{items.title}}</td>
+             <td colspan="7">{{items.title}}</td>
              </tr>
              <tr>
              <th>등록일시</th>
@@ -33,20 +33,18 @@
              <td colspan="1">{{items.viewcount}}</td>
              </tr>
              <tr>
-             <th>내용</th>
+             <th>내용</th><!--  vertical-align 이친구가 내용을 위로 정렬해 줍니다  -->
              <td
              v-html="hypercontent"
              class="scroll"
-             style="width:1340px; height:500px;"
+             style="width:1340px; height:500px; vertical-align: top;"
              colspan="7"
              >
              </td>
              </tr>
          </tbody>
-        </table>
-        <div>
-          <th class="btn">
-          </th>
+        </table><!--  padding이 내용과 버튼 사이간격을 벌려줍니다.  -->
+        <div style="padding-top: 30px">
           <button class="leftbutton" @click="back">목록</button>
         </div>
     </section>
@@ -114,6 +112,9 @@ export default
   width: 100px;
   height: 30px;
 }
+#content table td {
+    text-align: left;/* items 내용들 왼쪽 정렬 */
+}
 #content > .cont_inner {
     position: relative;
     min-height: calc(100% - 164px);
@@ -125,8 +126,5 @@ export default
 .scroll {
   overflow: scroll;
   background: #fff;
-}
-.left {
-  text-align: left;
 }
 </style>
