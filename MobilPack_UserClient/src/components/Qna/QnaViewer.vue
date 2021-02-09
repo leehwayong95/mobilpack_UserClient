@@ -123,4 +123,12 @@ export default {
   background-color: #6e8cc1;
   margin-right: 10px;
 }
+
+#center .cont_inner td {
+  text-align: initial;
+}
+#center tr:hover {
+  background: initial;
+  cursor:initial;
+}
 </style>
