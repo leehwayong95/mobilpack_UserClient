@@ -50,21 +50,18 @@ export default {
     }
   },
   mounted () {
-    if (this.$axios.defaults.headers.common['authorization'] === undefined || this.$axios.defaults.headers.common['authorization'] === null) {
-      this.$axios.defaults.headers.common['authorization'] = this.$cookie.get('authorization')
-    }
     if (this.$route.name === 'editQna') {
       let data = this.$route.params.data
       this.category = data.category
       this.title = data.title
-      this.content = data.content
+      this.content = data.content.replace(/(<br \/>)/g, '\n')
       this.edit = true
     }
   },
   methods: {
     cancel () {
       if (confirm('취소하시겠습니까?')) {
-        this.$router.push('/qna')
+        this.$router.go(-1)
       }
     },
     writeQna () {
@@ -81,7 +78,7 @@ export default {
         this.$axios.post('http://localhost:9000/api/qna/', {
           category: this.category,
           title: this.title,
-          content: this.content
+          content: this.convertHTML(this.content)
         })
           .then((res) => {
             alert('등록하였습니다.')
@@ -98,7 +95,7 @@ export default {
       this.$axios.put('http://localhost:9000/api/qna/' + this.$route.params.index, {
         category: this.category,
         title: this.title,
-        content: this.content
+        content: this.convertHTML(this.content)
       })
         .then((res) => {
           alert('수정되었습니다.')
@@ -109,6 +106,14 @@ export default {
           alert('로그인이 만료되었습니다. 다시 로그인해주세요')
           this.$router.push('/')
         })
+    },
+    convertHTML (content) {
+      var regURL = new RegExp(`(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)`, 'gi')
+      var regEmail = new RegExp('([xA1-xFEa-z0-9_-]+@[xA1-xFEa-z0-9-]+.[a-z0-9-]+)', 'gi')
+      return content
+        .replace(regURL, `<a href='$1://$2' target='_blank'>$1://$2</a>`)
+        .replace(regEmail, `<a href='mailto:$1'>$1</a>`)
+        .replace(/(?:\r\n|\r|\n)/g, '<br />')
     }
   }
 }
