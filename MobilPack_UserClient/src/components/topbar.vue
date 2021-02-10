@@ -2,9 +2,12 @@
   <div class="srch_box">
     <h1 v-on:click="jump('recommands')"> 관광지 추천 <br>&nbsp;&nbsp;&nbsp;페이지</h1>
     <div class="manu">
-        <button class="btn" v-on:click="jump('recommands')">추천장소</button>
-        <button class="btn"  v-on:click="jump('notice')">공지사항</button>
-        <button class="btn"  v-on:click="jump('qna')">문의사항</button>
+        <button v-if="route == 'recommands'" style="background: #3e61dc;" class="btn" v-on:click="jump('recommands')">추천장소</button>
+        <button v-else class="btn" v-on:click="jump('recommands')">추천장소</button>
+        <button v-if="route == 'Notice'" style="background: #3e61dc;" class="btn"  v-on:click="jump('notice')">공지사항</button>
+        <button v-else class="btn"  v-on:click="jump('notice')">공지사항</button>
+        <button v-if="route == 'Qna'" style="background: #3e61dc;" class="btn"  v-on:click="jump('qna')">문의사항</button>
+        <button v-else class="btn"  v-on:click="jump('qna')">문의사항</button>
         <span  v-on:click="jump('myinfo')">{{name}}님</span>
         <button class="btn2" @click="Logout">로그아웃</button>
     </div>
@@ -15,6 +18,7 @@
 export default {
   data () {
     return {
+      route: this.$route.name,
       click: false,
       name: this.$cookie.get('user_name')
     }
