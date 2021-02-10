@@ -42,6 +42,7 @@
       <button @click="writeQna">문의 등록</button>
     </div>
     <div class="cont_inner">
+      <p>| 검색 결과</p>
       <table>
         <colgroup>
           <col width="5%">

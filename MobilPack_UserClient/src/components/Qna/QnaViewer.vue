@@ -28,11 +28,11 @@
         </tr>
         <tr style="height: 200px">
           <th colspan="1">문의 내용</th>
-          <td colspan="3">{{data.content}}</td>
+          <td colspan="3" v-html="data.content"></td>
         </tr>
         <tr  style="height: 200px">
           <th colspan="1">답변 내용</th>
-          <td colspan="3" v-if="data.reply">{{data.reply}}</td>
+          <td colspan="3" v-if="data.reply" v-html="data.reply"></td>
           <td colspan="3" v-else>-</td>
         </tr>
       </table>
