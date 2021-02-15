@@ -54,7 +54,7 @@ export default {
       let data = this.$route.params.data
       this.category = data.category
       this.title = data.title
-      this.content = data.content.replace(/(<br \/>)/g, '\n')
+      this.content = data.content.replace(/(<br \/>)/g, '\n').replace(/(<([^>]+)>)/ig, '')
       this.edit = true
     }
   },
