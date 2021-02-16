@@ -281,7 +281,7 @@ select {
 /*Qna List*/
 #center > .cont_inner {
   position: relative;
-  min-height: calc(100% - 164px);
+  min-height: calc(100% - 200px);
   margin-top: 20px;
   padding: 0 30px 30px;
   background: #fff;
