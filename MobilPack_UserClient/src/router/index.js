@@ -45,6 +45,9 @@ const router = new Router({
       components: {
         default: Notice,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -53,6 +56,9 @@ const router = new Router({
       components: {
         default: Details,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -61,6 +67,9 @@ const router = new Router({
       components: {
         default: recommands,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -69,6 +78,9 @@ const router = new Router({
       components: {
         default: Qna,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -77,6 +89,9 @@ const router = new Router({
       components: {
         default: QnaViewer,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -85,6 +100,9 @@ const router = new Router({
       components: {
         default: WriteQna,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     },
     {
@@ -94,7 +112,10 @@ const router = new Router({
         default: WriteQna,
         top: topbar
       },
-      pros: true
+      pros: true,
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
+      }
     },
     {
       path: '/myinfo',
@@ -102,6 +123,9 @@ const router = new Router({
       components: {
         default: infoedit,
         top: topbar
+      },
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
       }
     }
   ]

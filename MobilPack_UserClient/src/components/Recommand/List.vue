@@ -14,22 +14,22 @@
             <option value="숙소">숙소</option>
           </select>
         </li>
-        <li>
+        <li style="width: calc(100% - 370px);">
           <span>장소명</span>
-          <input type="text">
+          <input type="text" v-model="title">
         </li>
       </ul>
-      <button>검색</button>
+      <button @click="getList">검색</button>
     </div>
     <div class="cont_inner">
       <ul>
-        <li v-for="(post, index) in List" :key="index">
+        <li v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
           <div class="item">
-            <img v-if="post.thumbnail != null" :src="post.thumbnail" />
+            <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
             <img v-else src="..\..\assets\images\temp.jpg" alt="none image">
             <div class="content">
               <span class="title">{{post.title}}</span>
-              <span>{{post.content}}</span>
+              <span class="content">{{post.content}}</span>
               <span class="tag">{{post.tag}}</span>
             </div>
             <div class="category">{{post.category}}</div>
@@ -37,17 +37,81 @@
         </li>
       </ul>
     </div>
+    <div class="paging">
+        <a class ="pagingFirst"  @click="getNextBeforePage('0')"/>
+          <ul v-for="(n,index) in paging()" v-bind:key="index" @click="getPage(n)">
+            <li  v-if="page !== n" class = "Nothere">{{n}}</li>
+            <li v-else class="here">{{n}}</li>
+          </ul>
+        <a class="pagingLast" @click="getNextBeforePage('1')"/>
+      </div>
   </div>
 </template>
 
-<style scoped>
-.search_box {
-  background-color:#fff;
-  border: solid 1px #ddd;
-  border-radius: 5px;
-  width: 100%;
-  height: 10%;
+<script>
+export default {
+  mounted () {
+    this.getList()
+  },
+  data () {
+    return {
+      category: '',
+      List: [],
+      page: 1,
+      title: '',
+      endpage: null,
+      postcount: null,
+      paging: function () {
+        var pagenumber = []
+        for (var i = 1; i <= this.endpage; i++) {
+          pagenumber.push(i)
+        }
+        return pagenumber
+      }
+    }
+  },
+  methods: {
+    getList () {
+      this.$axios.get('http://localhost:9000/api/post/search', {
+        params: {
+          page: this.page,
+          name: this.title,
+          count: 20,
+          category: this.category
+        }})
+        .then((res) => {
+          for (let i of res.data.result) {
+            if (i.content.length > 120) {
+              i.content = i.content.substr(0, 120) + '...'
+            }
+            this.List.push(i)
+          }
+          this.endpage = res.data.count / 20
+          this.endpage += (res.data.count % 20) ? 1 : 0
+        })
+    },
+    getPage (n) {
+      if (this.currentpage !== n) {
+        this.currentpage = n
+        this.getUserList()
+      }
+    },
+    getNextBeforePage (n) {
+      if (n === '0' && this.currentpage > 1) {
+        this.currentpage--
+      } else if (n === '1' && this.currentpage < this.endpage) {
+        this.currentpage++
+      }
+      this.getUserList()
+    },
+    getRecommendPost (n) {
+      alert(n + '번 게시물 가져올꺼')
+    }
+  }
 }
+</script>
+
+<style scoped>
 #center {
   overflow: scroll;
 }
@@ -61,6 +125,7 @@
   flex-direction: row;
   justify-content: baseline;
   align-items: center;
+  position: relative;
   padding: 10px 10px;
   width: 100%;
   height: 150px;
@@ -74,13 +139,25 @@
 div.item img {
   width: 128px;
   height: 128px;
+  border: solid 1px #ddd;
 }
 div.item span.title {
   font-weight: bold;
+  position: absolute;
+  top: 10px;
+}
+div.item span.content {
+  position: absolute;
+  top:40px;
+}
+div.item span.tag {
+  position: absolute;
+  bottom: 10px;
 }
 div.item div.category {
   position: absolute;
-  right: 60px;
+  right: 10px;
+  top: 10px;
   color:#FFF;
   border: solid 1px #aaa;
   border-radius: 5px;
@@ -91,28 +168,3 @@ div.item div.category {
   padding: 5px 0;
 }
 </style>
-
-<script>
-export default {
-  mounted () {
-    this.getList()
-  },
-  data () {
-    return {
-      category: '',
-      List: null,
-      page: 1,
-      endpage: null,
-      postcount: null
-    }
-  },
-  methods: {
-    getList () {
-      this.$axios.get('http://localhost:9000/api/post/search?page=1&name&count=20&category')
-        .then((res) => {
-          this.List = res.data.result
-        })
-    }
-  }
-}
-</script>
