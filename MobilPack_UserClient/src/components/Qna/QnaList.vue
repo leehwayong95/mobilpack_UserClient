@@ -8,7 +8,7 @@
       <ul>
         <li>
           <span>문의 유형</span>
-          <select v-model="category">
+          <select v-model="tmp.category">
             <option value="">전체</option>
             <option value="1">이용</option>
             <option value="2">오류</option>
@@ -17,26 +17,26 @@
         </li>
         <li>
           <span>제목</span>
-          <input type="text" v-model="title">
+          <input type="text" v-model="tmp.title">
         </li>
         <li class ="date">
           <span>문의 일시</span>
           <p class="date">
-            <input type="date" v-model="min">
+            <input type="date" v-model="tmp.min">
             <i>~</i>
-            <input type="date" v-model="max">
+            <input type="date" v-model="tmp.max">
           </p>
         </li>
         <li>
           <span>답변유무</span>
-          <select v-model="answer">
+          <select v-model="tmp.answer">
             <option value="">전체</option>
             <option value="0">답변대기</option>
             <option value="1">답변완료</option>
           </select>
         </li>
       </ul>
-      <button @click="getList">검색</button>
+      <button @click="getSearch">검색</button>
     </div>
     <div class="writeQna">
       <button @click="writeQna">문의 등록</button>
@@ -95,11 +95,20 @@ export default {
   data () {
     return {
       List: null,
-      category: '',
-      title: '',
-      min: '',
-      max: '',
-      answer: '',
+      Search: {
+        category: '',
+        title: '',
+        min: '',
+        max: '',
+        answer: ''
+      },
+      tmp: {
+        category: '',
+        title: '',
+        min: '',
+        max: '',
+        answer: ''
+      },
       page: 1,
       endpage: null,
       paging: function () {
@@ -123,13 +132,17 @@ export default {
     }
   },
   methods: {
+    getSearch () {
+      this.Search = this.tmp
+      this.getList()
+    },
     getList () {
       this.$axios.patch('http://localhost:9000/api/qna/search', {
-        category: this.category,
-        title: this.title,
-        min: this.min.replace(/-/g, ''),
-        max: this.max.replace(/-/g, ''),
-        answer: this.answer,
+        category: this.Search.category,
+        title: this.Search.title,
+        min: this.Search.min.replace(/-/g, ''),
+        max: this.Search.max.replace(/-/g, ''),
+        answer: this.Search.answer,
         page: this.page,
         count: 20
       })
@@ -150,18 +163,18 @@ export default {
       this.$router.push('/qna/' + n)
     },
     getPage (n) {
-      if (this.currentpage !== n) {
-        this.currentpage = n
-        this.getUserList()
+      if (this.page !== n) {
+        this.page = n
+        this.getList()
       }
     },
     getNextBeforePage (n) {
-      if (n === '0' && this.currentpage > 1) {
-        this.currentpage--
-      } else if (n === '1' && this.currentpage < this.endpage) {
-        this.currentpage++
+      if (n === '0' && this.page > 1) {
+        this.page--
+      } else if (n === '1' && this.page < this.endpage) {
+        this.page++
       }
-      this.getUserList()
+      this.getList()
     }
   }
 }

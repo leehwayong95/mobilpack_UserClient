@@ -6,6 +6,7 @@ import topbar from '@/components/topbar'
 import Notice from '@/components/Notice/Notice'
 import Details from '@/components/Notice/Details'
 import recommands from '@/components/Recommand/List'
+import recommandDetail from '@/components/Recommand/Detail'
 import infoedit from '@/components/My/info'
 import Qna from '@/components/Qna/QnaList'
 import WriteQna from '@/components/Qna/WriteQna'
@@ -73,6 +74,18 @@ const router = new Router({
       }
     },
     {
+      path: '/recommands/:index',
+      name: 'recommandsDetail',
+      components: {
+        default: recommandDetail,
+        top: topbar
+      },
+      pros: true,
+      beforeEnter: (to, from, next) => {
+        checklogin(to, from, next)
+      }
+    },
+    {
       path: '/qna',
       name: 'Qna',
       components: {
@@ -90,6 +103,7 @@ const router = new Router({
         default: QnaViewer,
         top: topbar
       },
+      pros: true,
       beforeEnter: (to, from, next) => {
         checklogin(to, from, next)
       }

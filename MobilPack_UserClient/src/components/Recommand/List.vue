@@ -7,7 +7,7 @@
       <ul>
         <li>
           <span>카테고리</span>
-          <select v-model="category">
+          <select v-model="tmp.category">
             <option value="">전체</option>
             <option value="관광지">관광지</option>
             <option value="맛집">맛집</option>
@@ -16,14 +16,14 @@
         </li>
         <li style="width: calc(100% - 370px);">
           <span>장소명</span>
-          <input type="text" v-model="title">
+          <input type="text" v-model="tmp.title">
         </li>
       </ul>
-      <button @click="getList">검색</button>
+      <button @click="getSearch">검색</button>
     </div>
     <div class="cont_inner">
       <ul>
-        <li v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
+        <li v-for="post in List" :key="post.index" @click="getRecommendPost(post.postindex)">
           <div class="item">
             <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
             <img v-else src="..\..\assets\images\temp.jpg" alt="none image">
@@ -55,10 +55,16 @@ export default {
   },
   data () {
     return {
-      category: '',
       List: [],
       page: 1,
-      title: '',
+      tmp: {
+        title: '',
+        category: ''
+      },
+      Search: {
+        title: '',
+        category: ''
+      },
       endpage: null,
       postcount: null,
       paging: function () {
@@ -71,13 +77,16 @@ export default {
     }
   },
   methods: {
+    getSearch () {
+      this.Search = this.tmp
+    },
     getList () {
       this.$axios.get('http://localhost:9000/api/post/search', {
         params: {
           page: this.page,
-          name: this.title,
+          name: this.Search.title,
           count: 20,
-          category: this.category
+          category: this.Search.category
         }})
         .then((res) => {
           for (let i of res.data.result) {
@@ -105,7 +114,7 @@ export default {
       this.getUserList()
     },
     getRecommendPost (n) {
-      alert(n + '번 게시물 가져올꺼')
+      this.$router.push({path: this.$route.path + '/' + n})
     }
   }
 }
@@ -130,6 +139,7 @@ export default {
   width: 100%;
   height: 150px;
   border: solid 1px #ddd;
+  cursor: pointer;
 }
 .cont_inner li div.item > div.content{
   display: flex;
