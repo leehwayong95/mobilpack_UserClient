@@ -9,7 +9,7 @@
       <h3>home > 문의목록 > 문의등록</h3>
     </div>
     <div class="cont_inner">
-      <table>
+      <table class="search">
         <tr>
           <th>문의유형</th>
           <td>

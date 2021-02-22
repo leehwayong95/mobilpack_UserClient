@@ -22,18 +22,17 @@
       <button @click="getList">검색</button>
     </div>
     <div class="cont_inner">
-      <ul>
+      <p>| 검색 결과</p>
+      <ul class="search">
         <li v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
-          <div class="item">
-            <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
-            <img v-else src="..\..\assets\images\temp.jpg" alt="none image">
-            <div class="content">
-              <span class="title">{{post.title}}</span>
-              <span class="content">{{post.content}}</span>
-              <span class="tag">{{post.tag}}</span>
-            </div>
-            <div class="category">{{post.category}}</div>
+          <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
+          <img v-else src="https://lh3.googleusercontent.com/proxy/MEEGX8hCSJiWMck-YycHygtCvyZmNNYm2N2kPk1Vq-36FhHOht-fI_0kiH2dTmu0dB3UmxvRET_bZ0HTYwCEGqdB4ZKrBaJLqnLR2XZFW3__qu3hq0rsSXbERDOgWeo" alt="none image">
+          <div class="content">
+            <span class="title">{{post.title}}</span>
+            <span class="content">{{post.content}}</span>
+            <span class="tag">{{post.tag}}</span>
           </div>
+          <div class="category">{{post.category}}</div>
         </li>
       </ul>
     </div>
@@ -112,15 +111,12 @@ export default {
 </script>
 
 <style scoped>
-#center {
-  overflow: scroll;
-}
-.cont_inner .item {
+.cont_inner li {
   height: 90%;
   width: 40px;
   margin-top: 10px;
 }
-.cont_inner li div.item {
+.cont_inner li{
   display: flex;
   flex-direction: row;
   justify-content: baseline;
@@ -131,30 +127,30 @@ export default {
   height: 150px;
   border: solid 1px #ddd;
 }
-.cont_inner li div.item > div.content{
+.cont_inner li div.content{
   display: flex;
   flex-direction: column;
   margin: 10px 10px
 }
-div.item img {
+.cont_inner li img {
   width: 128px;
   height: 128px;
   border: solid 1px #ddd;
 }
-div.item span.title {
+.cont_inner li span.title {
   font-weight: bold;
   position: absolute;
   top: 10px;
 }
-div.item span.content {
+.cont_inner li span.content {
   position: absolute;
   top:40px;
 }
-div.item span.tag {
+.cont_inner li span.tag {
   position: absolute;
   bottom: 10px;
 }
-div.item div.category {
+.cont_inner li div.category {
   position: absolute;
   right: 10px;
   top: 10px;
