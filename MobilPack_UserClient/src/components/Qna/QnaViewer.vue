@@ -87,7 +87,6 @@ export default {
       if (confirm('해당 문의를 삭제하시겠습니까?')) {
         this.$axios.delete('http://localhost:9000/api/qna/' + this.qnaindex)
           .then((res) => {
-            alert('삭제되었습니다.')
             this.$router.push('/qna')
           })
           .catch((err) => {
