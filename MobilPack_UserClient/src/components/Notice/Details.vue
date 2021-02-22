@@ -1,11 +1,11 @@
 <template>
-    <div id=content>
+    <div id=center>
     <span class="title">
     <h1>HOME</h1>
     <h2>공지사항 > 공지 사항 상세</h2>
     </span>
     <section class="cont_inner">
-        <table>
+        <table style="margin-top: 30px;">
         <colgroup>
         <col style="width: 100px;">
         <col style="width: 100px;">

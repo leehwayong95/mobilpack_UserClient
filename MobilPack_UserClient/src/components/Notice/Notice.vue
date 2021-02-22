@@ -1,7 +1,7 @@
 <template>
-    <div class = "scroll" id='content'>
+    <div id='center'>
        <span class="title">
-       <h1>HOME</h1>
+       <h1>| HOME</h1>
     </span>
     <div class="search">
       <ul>
@@ -12,9 +12,9 @@
       </ul>
       <button  @click="search" >검색</button>
     </div>
-    <div>
       <div class="cont_inner">
-        <table>
+      <p>| 검색 결과</p>
+        <table class="search">
             <colgroup>
             <col width="5%">
             <col width="60%">
@@ -52,7 +52,6 @@
         <a class="pagingLast"/>
       </div>
       </div>
-    </div>
     </div>
 </template>
 

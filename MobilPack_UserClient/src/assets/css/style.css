@@ -68,12 +68,13 @@ select {
 /* 요한 가운데 컨텐츠 영역 */
 #center {
   position: fixed;
-  left: 40px;
-  top: 130px;
-  width: calc(100% - 80px);
+  left: 0;
+  top: 100px;
+  width: 100%;
   height: calc(100% - 100px);
-  padding: 0 30px 30px 30px;
+  padding: 0 60px 30px 60px;
   background: #eee;
+  overflow: auto;
 }
 /* 상단 로그인바 세부설정 */
 #top > span {
@@ -297,6 +298,14 @@ select {
   font-size: 18px;
   line-height: 2em;
 }
+#center > .cont_inner > button {
+  display: block;
+  position: absolute;
+  right:30px;
+  top:30px;
+  width: 100px;
+  height: 30px;
+}
 #center > .title {
   display: block;
   width: 100%;
@@ -373,10 +382,16 @@ select {
   font-size: 14px;
   margin-top: 10px;
 }
-#center table tr {
+#center table.search tr {
   cursor: pointer;
 }
-#center table tr:hover {
+#center table.search tr:hover {
+  background: #dce7fa;
+}
+#center ul.search li {
+  cursor: pointer;
+}
+#center ul.search li:hover {
   background: #dce7fa;
 }
 #center table th {

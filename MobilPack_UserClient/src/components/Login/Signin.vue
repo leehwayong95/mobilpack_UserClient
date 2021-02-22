@@ -5,11 +5,9 @@
         회원가입
       </div>
       <table>
-        <tr><td>
-          <input type="text" id='signin_id' class="login_txt" placeholder="이메일" v-model="id"/>
-        </td></tr>
-        <tr><td>
-          <button type="button" id='signin_check' class="login_btn" @click='checkID'>중복확인</button>
+        <tr><td style="display: flex;justify-content: space-between;">
+          <input type="text" id='signin_id' class="login_txt" placeholder="이메일" v-model="id" style="width:80%"/>
+          <button type="button" id='signin_check' class="login_btn" @click='checkID' style="width:20%; margin: 0 0 0 10px;">중복확인</button>
         </td></tr>
         <tr><td>
           <input
@@ -41,7 +39,7 @@
         <tr id='service_agree'><span>(필수) 서비스 이용약관</span><td><input type="checkbox" v-model="serviceagree"></td></tr>
         <tr id='info_agree'><span>(필수) 개인정보 처리 방침</span><td><input type="checkbox" v-model="infomationagree"></td></tr>
       </table>
-      <div class = 'btn_wrap'>
+      <div class = 'btn_wrap' style="text-align: center;">
         <button type="button" class="login_btn" @click="signin">회원가입</button>
       </div>
     </div>

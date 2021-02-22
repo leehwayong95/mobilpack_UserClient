@@ -2,9 +2,8 @@
   <div id='center'>
     <div class="title">
       <h1>| 문의목록</h1>
-      <h3>home > 문의목록</h3>
     </div>
-    <div class="search" style="margin: 10px 0;">
+    <div class="search">
       <ul>
         <li>
           <span>문의 유형</span>
@@ -38,12 +37,10 @@
       </ul>
       <button @click="getSearch">검색</button>
     </div>
-    <div class="writeQna">
-      <button @click="writeQna">문의 등록</button>
-    </div>
     <div class="cont_inner">
       <p>| 검색 결과</p>
-      <table>
+      <button @click="writeQna">문의 등록</button>
+      <table class="search">
         <colgroup>
           <col width="5%">
           <col width="10%">
@@ -179,13 +176,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#center {
-  overflow: auto;
-}
-.here {
-  background-color: #3e61dc;
-  color: #fff;
-}
-</style>

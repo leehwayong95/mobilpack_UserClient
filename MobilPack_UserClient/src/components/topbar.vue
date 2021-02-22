@@ -71,7 +71,7 @@ export default {
      /* flex, justify-content, align-items:공부 필요합니다 */
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 20px 60px;
     background: #2c3a52;
     display: flex;
     justify-content: space-between;

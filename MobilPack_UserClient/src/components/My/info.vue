@@ -1,26 +1,32 @@
 <template>
   <div id="center">
-    <div id="content">
-      <div class="title">
-        <h1>내 정보 변경</h1>
-      </div>
-      <div class="cont_inner">
-        <table>
-          <tr>이름
-            <th><input type="text" placeholder="name" id="input_name" v-model="name"></th>
-          </tr>
-          <tr>연락처
-            <th><input type="text" placeholder="phone" id="input_phone" v-model="phone"></th>
-          </tr>
-          <tr>이메일
-            <th><input type="text" placeholder="name" id="input_email" v-model="email"><button id='check' @click="checkconfirm">중복확인</button></th>
-          </tr>
-          <tr>비밀번호
-            <th><button class="pwedit" @click="pwupdate">비밀번호 변경</button></th>
-          </tr>
-        </table>
-        <button class="infoupdate" @click="updateinfo">저 장</button>
-      </div>
+    <div class="title">
+      <h1>| 내 정보 변경</h1>
+    </div>
+    <div class="cont_inner">
+      <table>
+        <colgroup>
+          <col width="300">
+          <col>
+        </colgroup>
+        <tr>
+          <th>이름</th>
+          <td><input type="text" placeholder="name" id="input_name" v-model="name"></td>
+        </tr>
+        <tr>
+          <th>연락처</th>
+          <td><input type="text" placeholder="phone" id="input_phone" v-model="phone"></td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td><input type="text" placeholder="name" id="input_email" v-model="email"><button id='check' @click="checkconfirm">중복확인</button></td>
+        </tr>
+        <tr>
+          <th>비밀번호</th>
+          <td><button class="pwedit" @click="pwupdate">비밀번호 변경</button></td>
+        </tr>
+      </table>
+      <button class="infoupdate" @click="updateinfo">저 장</button>
     </div>
   </div>
 </template>
@@ -193,3 +199,22 @@ export default {
   }
 }
 </script>
+<style scoped>
+table{
+  margin-top: 30px !important;
+}
+table td{
+  text-align: left !important;
+}
+table td input{
+  width: 500px;
+  margin-right: 10px;
+}
+button{
+  position: relative !important;
+  width: 100px;
+  height: 30px;
+  margin: 0 auto;
+  right: 0 !important;
+}
+</style>
