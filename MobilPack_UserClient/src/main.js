@@ -6,10 +6,17 @@ import router from './router'
 import axios from 'axios'
 import VueCookie from 'vue-cookie'
 import modal from 'vue-js-modal'
+import naver from 'vue-naver-maps'
 
 Vue.use(VueCookie)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+
+Vue.use(naver, {
+  clientID: '94vq3rso8e',
+  useGovAPI: false,
+  subModeules: 'geocoder'
+})
 
 Vue.use(modal, { dynamic: true })
 /* eslint-disable no-new */

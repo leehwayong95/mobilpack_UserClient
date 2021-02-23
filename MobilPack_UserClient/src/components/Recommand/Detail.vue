@@ -5,30 +5,53 @@
     </div>
     <div class="cont_inner">
       <table>
+        <colgroup>
+          <col width="10%">
+          <col width="40%">
+          <col width="10%">
+          <col width="40%">
+          <col width="10%">
+          <col width="40%">
+        </colgroup>
         <tr>
           <th>장소명</th>
-          <td colspan='5'>{{Post.title}}</td>
+          <td colspan='5'>{{post.title}}</td>
         </tr>
         <tr>
           <th>주소</th>
-          <td>{{Post.address}}</td>
+          <td>{{post.address}}</td>
           <th>연락처</th>
-          <td colspan='3'>{{Post.phone}}</td>
+          <td colspan='3'>{{post.phone}}</td>
         </tr>
         <tr>
           <th>운영시간</th>
-          <td>데이터 만져야함</td>
+          <td>{{runningdate}} {{post.opentime}}~{{post.closetime}}</td>
           <th>입장마감</th>
-          <td>{{Post.endtime}}</td>
+          <td>{{post.endtime}}</td>
           <th>휴무일</th>
-          <td>이것도 데이터 만저야함</td>
+          <td>{{pausedate}}</td>
         </tr>
         <tr>
           <th>위치</th>
-          <td colspan='5'>{{Post.location}}</td>
+          <td colspan='5' style="item-align: center;">
+            <naver-maps
+              :height="600"
+              :width="800"
+              :mapOptions="mapOptions"
+              :initLayers="initLayers"
+              @load="onLoad"
+              style="margin: 0 auto">
+              <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng" @load="onMarkerLoaded"/>  <!-- 네이버 지도에서 마커를 찍는다 -->
+            </naver-maps>
+          </td>
         </tr>
         <tr>
-          <td colspan='6' v-html="Post.content"></td>
+          <td colspan='6'>
+            <span  v-html="post.content"></span>
+            <div v-for="i of files" :key="i" >
+              <img :src="i" alt="img" style="width: 20%;"/>
+            </div>
+          </td>
         </tr>
       </table>
       <div class="commentsBox">
@@ -43,7 +66,7 @@
               <div class="comment">
                 <span class="name">{{i.name}}</span>
                 <span class="content">{{i.content}}</span>
-                <span class="date">{{i.date}}</span>
+                <span class="date">{{i.createat}}</span>
               </div>
             </li>
           </ul>
@@ -58,18 +81,117 @@ export default {
   mounted () {
     this.getPost()
   },
+  updated () {
+    this.map.setCenter({lat: parseFloat(this.location[0]), lng: parseFloat(this.location[1])})
+    this.marker.setPosition({lat: parseFloat(this.location[0]), lng: parseFloat(this.location[1])})
+  },
   data () {
     return {
-      Post: '',
-      comments: [{name: '이화용', content: '아 정말구리네', date: '2020-02-17 14:20'}, {name: '이화용', content: '아 정말구리네', date: '2020-02-17 14:20'}]
+      post: '',
+      comments: '',
+      files: '',
+      runningdate: null,
+      pausedate: null,
+      location: null,
+      map: null, /* 지도를 사용하기 위해 map 객체를 생성 */
+      marker: null, /* 마커를 조작하기 위해 marker 객체를 생성 */
+      mapOptions: { /* 제주 시청을 기본값으로 설정함 */
+        lat: 33.49959,
+        lng: 126.53126,
+        zoom: 16,
+        zoomControl: true,
+        zoomControlOptions: {position: 'TOP_RIGHT'},
+        mapTypeControl: true,
+        draggable: false,
+        pinchZoom: false,
+        scrollWheel: false,
+        keyboardShortcuts: false,
+        disableDoubleTapZoom: true,
+        disableDoubleClickZoom: true,
+        disableTwoFingerTapZoom: true
+      },
+      initLayers: ['BACKGROUND', 'BACKGROUND_DETAIL', 'POI_KOREAN', 'TRANSIT', 'ENGLISH', 'CHINESE', 'JAPANESE']
     }
   },
   methods: {
     getPost () {
       this.$axios.get('http://localhost:9000/api/post/' + this.$route.params.index)
         .then((res) => {
-          this.Post = res.data
+          this.post = res.data.post
+          /* 휴대폰 번호 정규식 */
+          this.post.phone = this.post.phone.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, '$1-$2-$3')
+          /* 휴무일, 운영일 요일 구하기 */
+          let runningDateBit = parseInt(res.data.post.openday, 10).toString(2).split('')
+          this.pausedate = []
+          for (let bit of runningDateBit) {
+            this.pausedate.push((bit === '1' ? '0' : '1'))
+          }
+          this.pausedate = this.getRunningDate(this.pausedate).join('')
+          this.runningdate = this.getRunningDate(runningDateBit).join('')
+          /* 댓글, file List 부여 */
+          this.comments = res.data.comments
+          this.files = res.data.files
+          /* 네이버 지도 설정 */
+          this.location = res.data.post.location.split(',')
+          this.mapOptions.lat = parseFloat(this.location[0])
+          this.mapOptions.lng = parseFloat(this.location[1])
+
+          console.log(this.location)
         })
+    },
+    getRunningDate (runningDateBit) {
+      let result = []
+      let countinueDay = false
+      if (runningDateBit.length !== 7) {
+        for (let i = runningDateBit.length; i < 7; i++) {
+          runningDateBit.unshift('0')
+        }
+      }
+      for (let index in runningDateBit) {
+        if (countinueDay && runningDateBit[index] === '1') {
+          if (result[result.length - 1] !== '~') {
+            result.push('~')
+          }
+          if (index === (runningDateBit.length - 1).toString()) {
+            result.push(this.getDay(index))
+          }
+        } else if (countinueDay && runningDateBit[index] === '0' && result[result.length - 1] === '~') {
+          result.push(this.getDay(index - 1))
+          countinueDay = false
+        } else if (countinueDay && runningDateBit[index] === '0') {
+          countinueDay = false
+        } else if (!countinueDay && runningDateBit[index] === '1') {
+          result.push(this.getDay(index))
+          countinueDay = true
+        }
+        if (!countinueDay && result[result.length - 1] !== ', ' && result.length !== 0) {
+          result.push(', ')
+        }
+      }
+      if (result[result.length - 1] === ', ') {
+        result = result.splice(0, result.length - 1).reverse()
+      } else {
+        result = result.reverse()
+      }
+      return result
+    },
+    getDay (index) {
+      let result = {
+        0: '일',
+        1: '토',
+        2: '금',
+        3: '목',
+        4: '수',
+        5: '화',
+        6: '월'
+      }
+      return result[parseInt(index)]
+    },
+    onMarkerLoaded (vue) { /** 마커를 이용하기 위해 마커 객체 생성 */
+      this.marker = vue.marker
+    },
+    onLoad (vue) { /* 네이버 지도 api 사용을 위해 객체 생성 */
+      this.map = vue
     }
   }
 }
@@ -119,10 +241,12 @@ div.comment span.name {
   margin-left: 20px;
 }
 div.comment span.content {
-  margin-left: 20px;
+  position: absolute;
+  left: 100px;
 }
 div.comment span.date {
   position: absolute;
   right: 10px;
+  width: fit-content;
 }
 </style>
