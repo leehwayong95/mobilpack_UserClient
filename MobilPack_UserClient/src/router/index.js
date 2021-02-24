@@ -146,12 +146,12 @@ const router = new Router({
 })
 
 function checklogin (to, from, next) {
-  let token = VueCookie.get('authorization')
+  let token = VueCookie.get('Authorization')
   if (token === '' || token === null) {
     alert('로그인이 필요한 기능입니다.')
     next('/')
   } else {
-    axios.defaults.headers.common['authorization'] = token
+    axios.defaults.headers.common['Authorization'] = token
     next()
   }
 }

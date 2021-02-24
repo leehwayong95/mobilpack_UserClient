@@ -41,7 +41,8 @@
               :initLayers="initLayers"
               @load="onLoad"
               style="margin: 0 auto">
-              <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng" @load="onMarkerLoaded"/>  <!-- 네이버 지도에서 마커를 찍는다 -->
+              <naver-marker :lat="mapOptions.lat" :lng="mapOptions.lng" @load="onMarkerLoaded"/>
+              <!-- 네이버 지도에서 마커를 찍는다 -->
             </naver-maps>
           </td>
         </tr>
@@ -57,8 +58,8 @@
       <div class="commentsBox">
         <h3>| 리뷰</h3>
         <div class="input_comments">
-          <input type="text" class="input_text" placeholder="내용을 입력해주세요">
-          <button>리뷰 작성</button>
+          <input type="text" class="input_text" placeholder="내용을 입력해주세요" v-model="review">
+          <button @click="putUserReview">리뷰 작성</button>
         </div>
         <div class="comments">
           <ul>
@@ -66,7 +67,9 @@
               <div class="comment">
                 <span class="name">{{i.name}}</span>
                 <span class="content">{{i.content}}</span>
-                <span class="date">{{i.createat}}</span>
+                <span class="date">
+                  {{i.createat.split(' ')[0]}} {{i.createat.split(' ')[1].split(':')[0]}}:{{i.createat.split(' ')[1].split(':')[1]}}
+                </span>
               </div>
             </li>
           </ul>
@@ -85,11 +88,20 @@ export default {
     this.map.setCenter({lat: parseFloat(this.location[0]), lng: parseFloat(this.location[1])})
     this.marker.setPosition({lat: parseFloat(this.location[0]), lng: parseFloat(this.location[1])})
   },
+  watch: {
+    review () {
+      if (this.review.length > 100) {
+        alert('리뷰는 100자까지 등록가능합니다.')
+        this.review = this.review.substr(0, 100)
+      }
+    }
+  },
   data () {
     return {
       post: '',
       comments: '',
       files: '',
+      review: '',
       runningdate: null,
       pausedate: null,
       location: null,
@@ -135,8 +147,6 @@ export default {
           this.location = res.data.post.location.split(',')
           this.mapOptions.lat = parseFloat(this.location[0])
           this.mapOptions.lng = parseFloat(this.location[1])
-
-          console.log(this.location)
         })
     },
     getRunningDate (runningDateBit) {
@@ -186,6 +196,17 @@ export default {
         6: '월'
       }
       return result[parseInt(index)]
+    },
+    putUserReview () {
+      this.$axios.put('http://localhost:9000/api/post/' + this.$route.params.index + '?content=' + this.review)
+        .then((res) => {
+          if (res.data.status === true) {
+            this.getPost()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     onMarkerLoaded (vue) { /** 마커를 이용하기 위해 마커 객체 생성 */
       this.marker = vue.marker
