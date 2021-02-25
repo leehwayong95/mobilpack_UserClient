@@ -237,36 +237,6 @@ td .refer {
   align-items: center;
 }
 
-/*Modal Alert Message*/
-#modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-#modal > .modal_message {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 50px;
-  margin: 20px 0px;
-}
-#modal > .modal_message > input {
-  box-shadow: none;
-}
-#modal > .modal_button_wrap {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-#modal > .modal_button_wrap > input {
-  height: 30px;
-  width: 150px;
-}
-
 /* 페이징 */
 .paging {
   display: flex;

@@ -50,7 +50,7 @@
           <col width="10%">
           <col width="20%">
         </colgroup>
-        <tr>
+        <tr style="cursor: initial;">
           <th>No.</th>
           <th scope="col">문의 유형</th>
           <th scope="col">문의 제목</th>
@@ -66,14 +66,14 @@
             <td v-else-if="post.category == 3">기타</td>
           <td v-if="post.title.length > 10">{{post.title.substr(0,10)}}...</td>
           <td v-else>{{post.title}}</td>
-          <td>{{post.createat}}</td>
+          <td>{{post.createat.split(" ")[0]}}<br>{{post.createat.split(" ")[1].substr(0, 5)}}</td>
             <td v-if="post.replydate == null">답변대기</td>
-            <td v-else>답변완료</td>
+            <td v-else style="color: blue;">답변완료</td>
             <td v-if="(post['admin_name'] == null ) && (post.replydate == null)"> - </td>
             <td v-else-if="(post['admin_name'] == null) && (post.replydate != null)"> 삭제된 관리자 </td>
             <td v-else>{{post['admin_name']}}</td>
             <td v-if="post.replydate == null"> -</td>
-            <td v-else>{{post.replydate}}</td>
+            <td v-else>{{post.replydate.split(" ")[0]}}<br>{{post.replydate.split(" ")[1].substr(0, 5)}}</td>
         </tr>
       </table>
       <div class="paging">
