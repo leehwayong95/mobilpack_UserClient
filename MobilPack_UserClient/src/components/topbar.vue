@@ -32,7 +32,7 @@ export default {
       this.route = this.$route.name
     },
     Logout () {
-      this.$cookie.delete('authorization')
+      this.$cookie.delete('Authorization')
       this.$cookie.delete('user_name')
       this.$router.push('/')
     }

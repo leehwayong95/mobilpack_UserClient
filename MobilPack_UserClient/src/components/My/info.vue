@@ -6,7 +6,7 @@
     <div class="cont_inner">
       <table>
         <colgroup>
-          <col width="300">
+          <col width="200px">
           <col>
         </colgroup>
         <tr>
@@ -91,10 +91,6 @@ export default {
     },
     // 사용자 정보 불러오기 메서드
     getinfo () {
-      // 새로고침시 토큰 날라감을 방지
-      if (this.$axios.defaults.headers.common['authorization'] === undefined) {
-        this.$axios.defaults.headers.common['authorization'] = this.$cookie.get('authorization')
-      }
       this.$axios.post('http://localhost:9000/api/my/info')
         .then((res) => {
           if (res.data.status) {
@@ -109,7 +105,7 @@ export default {
         .catch((err) => { // 토큰 expire 경우
           console.log(err)
           alert('다시 로그인 해주세요')
-          this.$cookie.delete('authorization')
+          this.$cookie.delete('Authorization')
           this.$cookie.delete('name')
           this.$router.push('/')
         })
@@ -191,23 +187,32 @@ export default {
       },
       {
         name: 'dynamic-modal',
-        width: '330px',
-        height: '130px',
-        draggable: true
+        width: '400px',
+        height: '330px',
+        draggable: false
       })
     }
   }
 }
 </script>
 <style scoped>
-table{
+#center > .cont_inner {
+  padding: 0 100px;
+}
+#center table{
   margin-top: 30px !important;
+  width: 100%;
+}
+#center table th{
+  text-align: right;
+  padding: 0 10px;
+  width: 10%;
 }
 table td{
   text-align: left !important;
 }
 table td input{
-  width: 500px;
+  width: 30%;
   margin-right: 10px;
 }
 button{
