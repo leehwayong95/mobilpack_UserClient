@@ -2,7 +2,7 @@
   <div id="modal">
     <div class="title">
       <span>비밀번호 변경</span>
-      <img src="..\..\assets\images\btn_modalclose.png" width="20px" alt="Close Button" @click="$emit('close')">
+      <img src="../../assets/images/btn_modalclose.png" width="20px" alt="Close Button" @click="$emit('close')">
     </div>
     <div class="modal_message">
       <span>현재 비밀번호</span>
@@ -54,25 +54,41 @@ div.title img {
   align-items: center;
   text-align: right;
   justify-content: center;
+  position: absolute;
+  bottom: 24%
 }
 div.modal_button_wrap {
   position: absolute;
+  bottom: 10px;
+  left: 40%;
+}
+div.modal_button_wrap input{
+  width: 100px;
+  height: 30px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #000;
+  background: ;
+  border: solid 1px #ddd;
+  position: absolute;
+  bottom: 10px;
+  left: 35%;
 }
 p.ConfirmPwAlert {
   position: absolute;
-  bottom: 24%;
+  bottom: 28%;
   right: 8%;
   color: red;
 }
 p.regEditPwAlert {
   position: absolute;
-  bottom: 40%;
+  bottom: 44%;
   right: 8%;
   color: red;
 }
 p.CurrentPwAlert {
   position: absolute;
-  top: 39%;
+  top: 37%;
   right: 8%;
   color: red;
 }
@@ -84,16 +100,35 @@ export default {
     return {
       currentpw: '',
       editpw: '',
-      confirmpw: ''
+      confirmpw: '',
+      resCurrentPw: false,
+      regEditPw: false
     }
   },
   props: [
     'hot_table'
   ],
+  watch: {
+    editpw () {
+      if (this.regEditPw) {
+        this.regEditPw = false
+      }
+    },
+    currentpw () {
+      if (this.resCurrentPw) {
+        this.resCurrentPw = false
+      }
+    }
+  },
   methods: {
     editPw () {
-      if (this.currentpw === '' || this.editPw === '' || this.confirmpw === '') {
+      var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/
+      if (this.currentpw === '' || this.editpw === '' || this.confirmpw === '') {
         alert('비밀번호를 입력해주세요.')
+      } else if (this.editpw !== this.confirmpw) {
+        alert('비멀번호가 일치하지않습니다.')
+      } else if (!reg.test(this.editpw)) {
+        this.regEditPw = true
       } else {
         if (this.editpw === this.confirmpw) {
           this.$axios.post('http://localhost:9000/api/my/pwupdate', {
@@ -102,16 +137,12 @@ export default {
           })
             .then((res) => {
               if (res.status === 202) {
-                alert('현재 비밀번호와 일치하지 않습니다.')
+                this.resCurrentPw = true
               } else {
                 alert('변경되었습니다.')
                 this.$router.push('/')
                 this.$emit('close')
               }
-            })
-            .catch((err) => {
-              console.log(err)
-              alert('서버 작업중입니다.\n다시 시도해주세요.')
             })
         } else {
           alert('새비밀번호와 일치하지않습니다.\n다시 입력해주세요. ')

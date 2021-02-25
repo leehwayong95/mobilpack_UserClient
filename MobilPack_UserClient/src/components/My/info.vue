@@ -54,6 +54,8 @@ export default {
     email () {
       if (!this.checkEmail) {
         this.email = this.email.replace(/[^A-Za-z0-9@._+]/g, '')
+      } else {
+        this.checkEmail = false
       }
     },
     name () {
@@ -154,7 +156,6 @@ export default {
           .then((res) => {
             if (res.data.status) {
               alert('사용 가능한 이메일입니다.')
-              document.getElementById('input_email').disabled = true // 변경불가능하게 disabled
               this.checkEmail = true
             } else {
               alert('이미 사용중인 이메일입니다.')
