@@ -4,7 +4,10 @@
       <span v-html="this.$props.hot_table"></span>
     </div>
     <div class="modal_button_wrap">
-      <input class="btn btn-default col-md-3" @click="$emit('close')" type="button" value="확인">
+      <input class="btn btn-default col-md-3"
+        @click="$emit('close')"
+        type="button"
+        value="확인">
     </div>
   </div>
 </template>

@@ -158,7 +158,7 @@ export default {
               alert('사용 가능한 이메일입니다.')
               this.checkEmail = true
             } else {
-              alert('이미 사용중인 이메일입니다.')
+              alert('이미 사용중인 이메일입니다.\n확인 후 다시 입력해주세요.')
             }
           })
           .catch((err) => {
@@ -199,6 +199,8 @@ export default {
 <style scoped>
 #center > .cont_inner {
   padding: 0 100px;
+  background-image: url('../../assets/images/zzzzz.png');
+  background-repeat: no-repeat;
 }
 #center table{
   margin-top: 30px !important;

@@ -80,5 +80,6 @@ export default {
 .manu span {
     font-size: 20px;
     color: #fff;
+    cursor: pointer;
 }
 </style>
