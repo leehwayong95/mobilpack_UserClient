@@ -24,7 +24,7 @@
     <div class="cont_inner">
       <p>| 검색 결과</p>
       <ul class="search">
-        <li v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
+        <li class="result" v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
           <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
           <img v-else src="https://lh3.googleusercontent.com/proxy/MEEGX8hCSJiWMck-YycHygtCvyZmNNYm2N2kPk1Vq-36FhHOht-fI_0kiH2dTmu0dB3UmxvRET_bZ0HTYwCEGqdB4ZKrBaJLqnLR2XZFW3__qu3hq0rsSXbERDOgWeo" alt="none image">
           <div class="content">
@@ -35,15 +35,15 @@
           <div class="category">{{post.category}}</div>
         </li>
       </ul>
-    </div>
-    <div class="paging">
+      <div class="paging">
         <a class ="pagingFirst"  @click="getNextBeforePage('0')"/>
           <ul v-for="(n,index) in paging()" v-bind:key="index" @click="getPage(n)">
             <li  v-if="page !== n" class = "Nothere">{{n}}</li>
-            <li v-else class="here">{{n}}</li>
+            <li v-else class="active">{{n}}</li>
           </ul>
         <a class="pagingLast" @click="getNextBeforePage('1')"/>
       </div>
+    </div>
   </div>
 </template>
 
@@ -120,12 +120,8 @@ export default {
 </script>
 
 <style scoped>
-.cont_inner li {
-  height: 90%;
-  width: 40px;
-  margin-top: 10px;
-}
-.cont_inner li{
+
+.cont_inner li.result{
   display: flex;
   flex-direction: row;
   justify-content: baseline;
@@ -134,6 +130,7 @@ export default {
   padding: 10px 10px;
   width: 100%;
   height: 150px;
+  margin-top: 10px;
   border: solid 1px #ddd;
   cursor: pointer;
 }

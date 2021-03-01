@@ -60,12 +60,12 @@
           <th scope="col">답변 일시</th>
         </tr>
         <tr v-for="(post,index) in List" v-bind:key="index" @click="view(post.qnaindex)">
-          <td>{{((page-1) * 20) + (index+1)}}</td>
+          <td>{{totalPostCount - (index + (page-1)*20)}}</td>
             <td v-if="post.category == 1">이용</td>
             <td v-else-if="post.category == 2">오류</td>
             <td v-else-if="post.category == 3">기타</td>
-          <td v-if="post.title.length > 10">{{post.title.substr(0,10)}}...</td>
-          <td v-else>{{post.title}}</td>
+          <td class="title" v-if="post.title.length > 10">{{post.title.substr(0,10)}}...</td>
+          <td class="title" v-else>{{post.title}}</td>
           <td>{{post.createat.split(" ")[0]}}<br>{{post.createat.split(" ")[1].substr(0, 5)}}</td>
             <td v-if="post.replydate == null">답변대기</td>
             <td v-else style="color: blue;">답변완료</td>
@@ -80,13 +80,19 @@
         <a class ="pagingFirst"  @click="getNextBeforePage('0')"/>
           <ul v-for="(n,index) in paging()" v-bind:key="index" @click="getPage(n)">
             <li  v-if="page !== n" class = "Nothere">{{n}}</li>
-            <li v-else class="here">{{n}}</li>
+            <li v-else class="active">{{n}}</li>
           </ul>
         <a class="pagingLast" @click="getNextBeforePage('1')"/>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+#center td.title {
+  text-align: left;
+}
+</style>
 
 <script>
 export default {
@@ -108,6 +114,7 @@ export default {
         answer: ''
       },
       page: 1,
+      totalPostCount: '',
       endpage: null,
       paging: function () {
         var pagenumber = []
@@ -146,6 +153,7 @@ export default {
       })
         .then((res) => {
           this.List = res.data.list
+          this.totalPostCount = res.data.count
           this.endpage = res.data.count / 20
           this.endpage += (res.data.count % 20) ? 1 : 0
         })

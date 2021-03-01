@@ -6,6 +6,12 @@
     </div>
     <div class="cont_inner">
       <table style ="margin-top: 30px">
+        <colgroup>
+          <col width="10%">
+          <col width="40%">
+          <col width="10%">
+          <col width="40%">
+        </colgroup>
         <tr style="height: 80px">
           <th>문의 유형</th>
             <td v-if="data.category == 1">이용</td>
@@ -28,7 +34,16 @@
         </tr>
         <tr style="height: 200px">
           <th colspan="1">문의 내용</th>
-          <td colspan="3" v-html="data.content"></td>
+          <td colspan="3" v-html="data.content" v-if="!editMode"></td>
+          <td colspan="3" v-else>
+            <div id="editMode">
+              <textarea v-model="content"></textarea>
+              <div id="editButton">
+                <button @click="editQna">문의 수정</button>
+                <button @click="editMode = false">취소</button>
+              </div>
+            </div>
+          </td>
         </tr>
         <tr  style="height: 200px">
           <th colspan="1">답변 내용</th>
@@ -40,7 +55,7 @@
         <div class="btn_list">
           <button @click="goList">목록</button>
         </div>
-        <div class="btn_crud" v-if="permission">
+        <div class="btn_crud" v-if="permission && (data['admin_id'] === null)">
           <button class="btn_delete" @click="setUpdate">문의 수정</button>
           <button @click="setDelete">문의 삭제</button>
         </div>
@@ -53,9 +68,11 @@
 export default {
   data () {
     return {
-      qnaindex: null,
+      qnaindex: this.$route.params.index,
       permission: false,
-      data: ''
+      data: '',
+      content: '',
+      editMode: false
     }
   },
   created () {
@@ -63,7 +80,6 @@ export default {
   },
   methods: {
     getQna (n) {
-      this.qnaindex = n
       this.$axios.get('http://localhost:9000/api/qna/' + n)
         .then((res) => {
           if (res.status === 202) {
@@ -89,15 +105,30 @@ export default {
           .then((res) => {
             this.$router.push('/qna')
           })
-          .catch((err) => {
-            console.log(err)
-            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
-            this.$router.push('/')
-          })
       }
     },
     setUpdate () {
-      this.$router.push({name: 'editQna', params: {data: this.data}})
+      this.content = this.data.content.replace(/(<br \/>)/g, '\n').replace(/(<([^>]+)>)/ig, '')
+      this.editMode = true
+    },
+    editQna () {
+      this.$axios.put('http://localhost:9000/api/qna/' + this.$route.params.index, {
+        content: this.convertHTML(this.content)
+      })
+        .then((res) => {
+          alert('수정되었습니다.')
+          this.editMode = false
+          this.content = ''
+          this.getQna(this.$route.params.index)
+        })
+    },
+    convertHTML (content) {
+      var regURL = new RegExp(`(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)`, 'gi')
+      var regEmail = new RegExp('([xA1-xFEa-z0-9_-]+@[xA1-xFEa-z0-9-]+.[a-z0-9-]+)', 'gi')
+      return content
+        .replace(regURL, `<a href='$1://$2' target='_blank'>$1://$2</a>`)
+        .replace(regEmail, `<a href='mailto:$1'>$1</a>`)
+        .replace(/(?:\r\n|\r|\n)/g, '<br />')
     }
   }
 }
@@ -129,5 +160,22 @@ export default {
 #center tr:hover {
   background: initial;
   cursor:initial;
+}
+div#editMode {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: fit-content;
+}
+div#editMode div#editButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 10px;
+}
+div#editMode div#editButton button{
+  width: 80px;
+  height: 40px;
+  margin: 10px 0;
 }
 </style>

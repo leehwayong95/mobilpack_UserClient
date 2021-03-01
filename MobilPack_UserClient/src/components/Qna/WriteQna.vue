@@ -1,18 +1,17 @@
 <template>
   <div id="center">
-    <div class="title" v-if="edit">
-      <h1>| 문의수정</h1>
-      <h3>home > 문의목록 > 문의내용 > 문의수정</h3>
-    </div>
-    <div class="title" v-else>
+    <div class="title">
       <h1>| 문의등록</h1>
       <h3>home > 문의목록 > 문의등록</h3>
     </div>
     <div class="cont_inner">
-      <table class="search">
+      <table>
+        <colgroup>
+          <col width="20%">
+        </colgroup>
         <tr>
           <th>문의유형</th>
-          <td>
+          <td id="category">
             <select v-model="category" id="category">
               <option value="">선택해주세요</option>
               <option value="1">이용</option>
@@ -25,19 +24,36 @@
           <th>제목</th>
           <td><input type="text" v-model="title" id="title"></td>
         </tr>
-        <tr>
+        <tr id="input">
           <th>내용</th>
-          <td><textarea type="text" class="content" v-model="content" id="input_Q"/></td>
+          <td><textarea type="text" class="content" v-model="content" id="input_Q" /></td>
         </tr>
       </table>
       <div class="btn_wrap">
         <button class="cancel" @click="cancel">취소</button>
-        <button class="save" @click="editQna" v-if="edit">수정</button>
-        <button class="save" @click="writeQna" v-else>등록</button>
+        <button class="save" @click="writeQna">등록</button>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+#center table th {
+  text-align: right;
+  padding: 5px;
+}
+select#category {
+  width: 30%;
+  border: solid 1px #ddd;
+}
+td#category {
+  text-align: left;
+}
+tr#input textarea{
+  height: 600px;
+  margin: 10px 0;
+}
+</style>
 
 <script>
 export default {
@@ -45,16 +61,27 @@ export default {
     return {
       category: '',
       title: '',
-      content: '',
-      edit: false
+      content: ''
+    }
+  },
+  watch: {
+    title () {
+      if (this.title.length > 10) {
+        this.title = this.title.substr(0, 10)
+      }
+    },
+    content () {
+      if (this.content.length > 1000) {
+        this.content = this.content.substr(0, 1000)
+      }
     }
   },
   mounted () {
-    if (this.$route.name === 'editQna') {
+    if (this.$route.name === 'editQna') { // 수정모드 삭제해야함
       let data = this.$route.params.data
       this.category = data.category
       this.title = data.title
-      this.content = data.content.replace(/(<br \/>)/g, '\n').replace(/(<([^>]+)>)/ig, '')
+      this.content = data.content
       this.edit = true
     }
   },
@@ -84,28 +111,7 @@ export default {
             alert('등록하였습니다.')
             this.$router.push('/qna')
           })
-          .catch((err) => {
-            console.log(err)
-            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
-            this.$router.push('/')
-          })
       }
-    },
-    editQna () {
-      this.$axios.put('http://localhost:9000/api/qna/' + this.$route.params.index, {
-        category: this.category,
-        title: this.title,
-        content: this.convertHTML(this.content)
-      })
-        .then((res) => {
-          alert('수정되었습니다.')
-          this.$router.push('/qna/' + this.$route.params.index)
-        })
-        .catch((err) => {
-          console.log(err)
-          alert('로그인이 만료되었습니다. 다시 로그인해주세요')
-          this.$router.push('/')
-        })
     },
     convertHTML (content) {
       var regURL = new RegExp(`(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)`, 'gi')
