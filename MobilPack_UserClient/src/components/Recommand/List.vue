@@ -26,7 +26,7 @@
       <ul class="search">
         <li class="result" v-for="post of List" :key="post.index" @click="getRecommendPost(post.postindex)">
           <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
-          <img v-else src="https://lh3.googleusercontent.com/proxy/MEEGX8hCSJiWMck-YycHygtCvyZmNNYm2N2kPk1Vq-36FhHOht-fI_0kiH2dTmu0dB3UmxvRET_bZ0HTYwCEGqdB4ZKrBaJLqnLR2XZFW3__qu3hq0rsSXbERDOgWeo" alt="none image">
+          <img v-else src="../../assets/images/temp.jpg" alt="none image">
           <div class="content">
             <span class="title">{{post.title}}</span>
             <span class="content">{{post.content}}</span>
@@ -78,6 +78,9 @@ export default {
   methods: {
     getSearch () {
       this.Search = this.tmp
+      this.page = 1
+      this.List = []
+      this.getList()
     },
     getList () {
       this.$axios.get('http://localhost:9000/api/post/search', {

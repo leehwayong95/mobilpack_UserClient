@@ -150,6 +150,7 @@ export default {
       // Flag에 따라 동작
       if (doFlag) {
         this.Search = this.tmp
+        this.page = 1
         this.getList()
       } else {
         alert('유효하지 않은 날짜입니다.\n날짜간격은 12개월 이내로, 시작일은 종료일보다 앞서서 설정해주세요')
