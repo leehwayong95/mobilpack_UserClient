@@ -91,9 +91,12 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err)
-          alert('로그인이 만료되었습니다. 다시 로그인해주세요')
-          this.$router.push('/')
+          if (err.response.status === 401) {
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+            this.$cookie.delete('Authorization')
+            this.$cookie.delete('user_name')
+            this.$router.push('/')
+          }
         })
     },
     goList () {

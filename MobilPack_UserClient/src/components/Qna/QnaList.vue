@@ -174,8 +174,12 @@ export default {
           this.endpage += (res.data.count % 20) ? 1 : 0
         })
         .catch((err) => {
-          console.log(err)
-          alert('개발자가 열심히 일중입니다\n잠시 후 이용해주세요')
+          if (err.response.status === 401) {
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+            this.$cookie.delete('Authorization')
+            this.$cookie.delete('user_name')
+            this.$router.push('/')
+          }
         })
     },
     writeQna () {

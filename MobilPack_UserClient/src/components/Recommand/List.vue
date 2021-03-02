@@ -100,6 +100,14 @@ export default {
           this.endpage = res.data.count / 20
           this.endpage += (res.data.count % 20) ? 1 : 0
         })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+            this.$cookie.delete('Authorization')
+            this.$cookie.delete('user_name')
+            this.$router.push('/')
+          }
+        })
     },
     getPage (n) {
       if (this.currentpage !== n) {

@@ -205,7 +205,12 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err)
+          if (err.response.status === 401) {
+            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+            this.$cookie.delete('Authorization')
+            this.$cookie.delete('user_name')
+            this.$router.push('/')
+          }
         })
     },
     onMarkerLoaded (vue) { /** 마커를 이용하기 위해 마커 객체 생성 */

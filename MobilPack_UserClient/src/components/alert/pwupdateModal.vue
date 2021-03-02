@@ -144,6 +144,14 @@ export default {
                 this.$emit('close')
               }
             })
+            .catch((err) => {
+              if (err.response.status === 401) {
+                alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+                this.$cookie.delete('Authorization')
+                this.$cookie.delete('user_name')
+                this.$router.push('/')
+              }
+            })
         } else {
           alert('새비밀번호와 일치하지않습니다.\n다시 입력해주세요. ')
           this.editpw = ''
