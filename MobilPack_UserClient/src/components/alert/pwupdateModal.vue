@@ -65,14 +65,14 @@ div.modal_button_wrap {
 div.modal_button_wrap input{
   width: 100px;
   height: 30px;
-  border-radius: 3px;
   font-size: 14px;
-  color: #000;
-  background: ;
+  color: #fff;
+  background: #3d4b64;
   border: solid 1px #ddd;
+  border-radius: 5px;
   position: absolute;
   bottom: 10px;
-  left: 35%;
+  left: 50%;
 }
 p.ConfirmPwAlert {
   position: absolute;

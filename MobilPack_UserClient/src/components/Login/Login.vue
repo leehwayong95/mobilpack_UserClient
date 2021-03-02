@@ -88,7 +88,7 @@ export default {
               this.$axios.defaults.headers.common['Authorization'] = res.data['jwt-token']
               this.$router.push({name: 'recommands'})
             } else {
-              this.alert('로그인에 실패하였습니다.<br><br>로그인 정보를 다시 확인해주세요.')
+              this.alert('등록하신 비밀번호와 일치하지 않습니다.<br><br>확인 후 다시 입력해주세요.')
             }
           })
           .catch((err) => {

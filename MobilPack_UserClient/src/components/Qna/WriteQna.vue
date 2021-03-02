@@ -66,8 +66,8 @@ export default {
   },
   watch: {
     title () {
-      if (this.title.length > 10) {
-        this.title = this.title.substr(0, 10)
+      if (this.title.length > 50) {
+        this.title = this.title.substr(0, 50)
       }
     },
     content () {
