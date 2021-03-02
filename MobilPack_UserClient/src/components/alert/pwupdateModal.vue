@@ -14,7 +14,7 @@
     </div>
     <p v-if="resCurrentPw" class="CurrentPwAlert">현재 비밀번호와 일치하지 않습니다.</p>
     <p v-if="regEditPw" class="regEditPwAlert">영문, 숫자를 포함 8자 이상으로 입력해주세요.</p>
-    <p v-if="confirmpw !== editpw" class="ConfirmPwAlert">새 비밀번호와 일치하지 않습니다.</p>
+    <p v-if="resConfirmpw" class="ConfirmPwAlert">새 비밀번호와 일치하지 않습니다.</p>
     <div class="modal_button_wrap">
       <input class="btn btn-default col-md-3" @click="editPw" type="button" value="변경하기">
     </div>
@@ -102,7 +102,8 @@ export default {
       editpw: '',
       confirmpw: '',
       resCurrentPw: false,
-      regEditPw: false
+      regEditPw: false,
+      resConfirmpw: false
     }
   },
   props: [
@@ -118,18 +119,40 @@ export default {
       if (this.resCurrentPw) {
         this.resCurrentPw = false
       }
+    },
+    confirmpw () {
+      if (this.resConfirmpw) {
+        this.resConfirmpw = false
+      }
     }
   },
   methods: {
     editPw () {
+      let flag = true
       var reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/
       if (this.currentpw === '' || this.editpw === '' || this.confirmpw === '') {
         alert('비밀번호를 입력해주세요.')
-      } else if (this.editpw !== this.confirmpw) {
-        alert('비멀번호가 일치하지않습니다.')
-      } else if (!reg.test(this.editpw)) {
+        flag = false
+      }
+      if (this.editpw !== this.confirmpw) {
+        this.resConfirmpw = true
+        flag = false
+      }
+      if (!reg.test(this.editpw)) {
         this.regEditPw = true
-      } else {
+        flag = false
+      }
+      this.$axios.post('http://localhost:9000/api/my/pwupdate', {
+        currentpw: this.currentpw,
+        editpw: this.currentpw
+      })
+        .then((res) => {
+          if (res.status === 202) {
+            this.resCurrentPw = true
+            flag = false
+          }
+        })
+      if (flag) {
         if (this.editpw === this.confirmpw) {
           this.$axios.post('http://localhost:9000/api/my/pwupdate', {
             currentpw: this.currentpw,
