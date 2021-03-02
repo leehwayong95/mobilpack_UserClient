@@ -132,16 +132,16 @@ export default {
     getSearch () {
       // 동작여부 Flag
       let doFlag = true
-      // 최소기간에서 1년후 변수
-      let minAfterYear = ''
       // 조건 맞는지 확인
       if (this.tmp.min && this.tmp.max) { // min, max 둘다 주어졌을때만 동작
-        minAfterYear = this.$moment(this.tmp.min).add(12, 'months').add(1, 'd')
-        minAfterYear = this.$moment(minAfterYear).format('YYYY-MM-DD')
         if (this.tmp.min > this.tmp.max) {
           doFlag = false
         }
         if (doFlag) {
+          // 최소기간에서 1년후 기간 객체 이용해서 생성
+          let minAfterYear = this.$moment(this.tmp.min).add(12, 'months').add(1, 'd')
+          minAfterYear = this.$moment(minAfterYear).format('YYYY-MM-DD')
+          // 비교
           if (this.tmp.max > minAfterYear) {
             doFlag = false
           }
