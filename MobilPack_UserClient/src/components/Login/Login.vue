@@ -26,13 +26,15 @@
 @import url('../../assets/css/content');
 
 div.login_logo {
-  font-weight: 500;
   font-size: 50px;
+  font-weight: bold;
+  color: #999;
 }
 div.inputform {
   border: solid 1px #aaa;
-  padding: 20px;
+  padding: 30px;
   padding-top: 50px;
+  font-weight: bold;
 }
 div.inputform span {
   display: inline-block;

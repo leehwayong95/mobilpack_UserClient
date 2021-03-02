@@ -128,18 +128,33 @@ export default {
   mounted () {
     this.getList()
   },
-  watch: {
-    max () {
-      if (this.min > this.max) {
-        alert('최소일 보다 커야합니다.')
-        this.max = this.min + 1
-      }
-    }
-  },
   methods: {
     getSearch () {
-      this.Search = this.tmp
-      this.getList()
+      // 동작여부 Flag
+      let doFlag = true
+      // 최소기간에서 1년후 변수
+      let minAfterYear = ''
+      // 조건 맞는지 확인
+      if (this.tmp.min && this.tmp.max) { // min, max 둘다 주어졌을때만 동작
+        minAfterYear = this.$moment(this.tmp.min).add(12, 'months').add(1, 'd')
+        minAfterYear = this.$moment(minAfterYear).format('YYYY-MM-DD')
+        if (this.tmp.min > this.tmp.max) {
+          doFlag = false
+        }
+        if (doFlag) {
+          if (this.tmp.max > minAfterYear) {
+            doFlag = false
+          }
+        }
+      }
+      // Flag에 따라 동작
+      if (doFlag) {
+        this.Search = this.tmp
+        this.getList()
+      } else {
+        alert('유효하지 않은 날짜입니다.\n날짜간격은 12개월 이내로, 시작일은 종료일보다 앞서서 설정해주세요')
+        this.tmp.max = ''
+      }
     },
     getList () {
       this.$axios.patch('http://localhost:9000/api/qna/search', {

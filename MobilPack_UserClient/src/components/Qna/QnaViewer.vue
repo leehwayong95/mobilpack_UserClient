@@ -161,6 +161,11 @@ export default {
   background: initial;
   cursor:initial;
 }
+#center table th {
+  text-align: right;
+  font-weight: 500;
+  padding: 5px;
+}
 div#editMode {
   display: flex;
   flex-direction: row;
