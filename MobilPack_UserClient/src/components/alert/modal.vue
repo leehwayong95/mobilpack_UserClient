@@ -43,11 +43,17 @@ div.modal_button_wrap {
 }
 
 div.modal_button_wrap input {
-  margin: 0;
   width: 100px;
   height: 30px;
-  background: #aaa;
-  border-radius: 3px;
+  font-size: 14px;
+  color: #fff;
+  background: #3d4b64;
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>
 
