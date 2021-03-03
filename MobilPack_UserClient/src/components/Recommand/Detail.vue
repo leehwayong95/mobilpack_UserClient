@@ -31,12 +31,10 @@
           <th>휴무일</th>
           <td>{{pausedate}}</td>
         </tr>
-        <tr>
+        <tr class="map">
           <th>위치</th>
           <td colspan='5' style="item-align: center;">
             <naver-maps
-              :height="600"
-              :width="800"
               :mapOptions="mapOptions"
               :initLayers="initLayers"
               @load="onLoad"
@@ -47,7 +45,7 @@
           </td>
         </tr>
         <tr>
-          <td colspan='6'>
+          <td colspan='6' class="content">
             <span  v-html="post.content"></span>
             <div v-for="i of files" :key="i" >
               <img :src="i" alt="img" style="width: 20%;"/>
@@ -230,6 +228,15 @@ export default {
   background: initial;
   cursor:initial;
 }
+#center table td {
+  text-align: left;
+}
+#center table td.content {
+  padding: 20px;
+}
+#center table tr.map {
+  height: 500px;
+}
 div.commentsBox {
   margin: 10px 0 ;
 }
@@ -274,5 +281,9 @@ div.comment span.date {
   position: absolute;
   right: 10px;
   width: fit-content;
+}
+div#vue-naver-maps {
+  width: 100%;
+  height: 100%;
 }
 </style>
