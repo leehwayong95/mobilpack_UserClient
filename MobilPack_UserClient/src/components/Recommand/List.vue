@@ -28,11 +28,11 @@
           <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
           <img v-else src="../../assets/images/temp.jpg" alt="none image">
           <div class="content">
+            <div class="category">{{post.category}}</div>
             <span class="title">{{post.title}}</span>
             <span class="content">{{post.content}}</span>
             <span class="tag">{{post.tag}}</span>
           </div>
-          <div class="category">{{post.category}}</div>
         </li>
       </ul>
       <div class="paging">
@@ -137,7 +137,6 @@ export default {
   flex-direction: row;
   justify-content: baseline;
   align-items: center;
-  position: relative;
   padding: 10px 10px;
   width: 100%;
   height: 150px;
@@ -148,7 +147,10 @@ export default {
 .cont_inner li div.content{
   display: flex;
   flex-direction: column;
-  margin: 10px 10px
+  margin: 10px 10px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 .cont_inner li img {
   width: 128px;
@@ -159,10 +161,13 @@ export default {
   font-weight: bold;
   position: absolute;
   top: 10px;
+  left: 90px;
 }
 .cont_inner li span.content {
   position: absolute;
-  top:40px;
+  top: 40px;
+  width: 70%;
+  margin-top: 10px;
 }
 .cont_inner li span.tag {
   position: absolute;
@@ -170,8 +175,7 @@ export default {
 }
 .cont_inner li div.category {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  top: 2px;
   color:#FFF;
   border: solid 1px #aaa;
   border-radius: 5px;
