@@ -1,5 +1,8 @@
 <template>
   <div id="modal">
+    <div class="closebtn">
+      <img src="@/assets/images/btn_modalclose.png" width="20px" alt="Close Button" @click="$emit('close')">
+    </div>
     <div class="modal_message">
       <span v-html="this.$props.hot_table"></span>
     </div>
@@ -22,6 +25,12 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
+}
+div.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 div.modal_message {
   position: absolute;

@@ -2,7 +2,7 @@
   <div id="modal">
     <div class="title">
       <span>비밀번호 변경</span>
-      <img src="../../assets/images/btn_modalclose.png" width="20px" alt="Close Button" @click="$emit('close')">
+      <img src="@/assets/images/btn_modalclose.png" width="20px" alt="Close Button" @click="$emit('close')">
     </div>
     <div class="modal_message">
       <span>현재 비밀번호</span>
