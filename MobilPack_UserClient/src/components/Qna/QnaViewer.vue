@@ -12,7 +12,7 @@
           <col width="10%">
           <col width="40%">
         </colgroup>
-        <tr style="height: 80px">
+        <tr>
           <th>문의 유형</th>
             <td v-if="data.category == 1">이용</td>
             <td v-else-if="data.category == 2">오류</td>
@@ -20,7 +20,7 @@
           <th>문의 일시</th>
           <td>{{data.createat}}</td>
         </tr>
-        <tr style="height: 80px">
+        <tr>
           <th>답변 상태</th>
           <td v-if="data['admin_id']">답변완료</td>
           <td v-else>답변대기</td>
@@ -28,7 +28,7 @@
           <td v-if="data.replydate">{{data.replydate}}</td>
           <td v-else>-</td>
         </tr>
-        <tr style="height: 80px">
+        <tr>
           <th colspan="1">제목</th>
           <td colspan="3">{{data.title}}</td>
         </tr>
@@ -165,7 +165,6 @@ export default {
   cursor:initial;
 }
 #center table th {
-  text-align: right;
   font-weight: 500;
   padding: 5px;
 }

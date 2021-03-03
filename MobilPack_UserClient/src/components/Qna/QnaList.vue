@@ -66,14 +66,14 @@
             <td v-else-if="post.category == 3">기타</td>
           <td class="title" v-if="post.title.length > 35">{{post.title.substr(0,35)}}...</td>
           <td class="title" v-else>{{post.title}}</td>
-          <td>{{post.createat.split(" ")[0]}}<br>{{post.createat.split(" ")[1].substr(0, 5)}}</td>
+          <td>{{post.createat.split(" ")[0]}} {{post.createat.split(" ")[1].substr(0, 5)}}</td>
             <td v-if="post.replydate == null">답변대기</td>
             <td v-else style="color: blue;">답변완료</td>
             <td v-if="(post['admin_name'] == null ) && (post.replydate == null)"> - </td>
             <td v-else-if="(post['admin_name'] == null) && (post.replydate != null)"> 삭제된 관리자 </td>
             <td v-else>{{post['admin_name']}}</td>
             <td v-if="post.replydate == null"> -</td>
-            <td v-else>{{post.replydate.split(" ")[0]}}<br>{{post.replydate.split(" ")[1].substr(0, 5)}}</td>
+            <td v-else>{{post.replydate.split(" ")[0]}} {{post.replydate.split(" ")[1].substr(0, 5)}}</td>
         </tr>
       </table>
       <div class="paging">
@@ -113,7 +113,7 @@ export default {
         max: '',
         answer: ''
       },
-      page: 1,
+      page: this.$route.query.page ? parseInt(this.$route.query.page) : 1,
       totalPostCount: '',
       endpage: null,
       paging: function () {
@@ -170,7 +170,7 @@ export default {
         .then((res) => {
           this.List = res.data.list
           this.totalPostCount = res.data.count
-          this.endpage = res.data.count / 20
+          this.endpage = parseInt(res.data.count / 20)
           this.endpage += (res.data.count % 20) ? 1 : 0
         })
         .catch((err) => {
@@ -191,16 +191,16 @@ export default {
     getPage (n) {
       if (this.page !== n) {
         this.page = n
+        this.$router.push({name: this.$route.name, query: {page: n}})
         this.getList()
       }
     },
     getNextBeforePage (n) {
       if (n === '0' && this.page > 1) {
-        this.page--
+        this.getPage(this.page - 1)
       } else if (n === '1' && this.page < this.endpage) {
-        this.page++
+        this.getPage(this.page + 1)
       }
-      this.getList()
     }
   }
 }

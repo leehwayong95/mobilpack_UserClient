@@ -28,8 +28,10 @@
           <img v-if="post.thumbnail != null" :src="post.thumbnail" alt="Thumbnail"/>
           <img v-else src="../../assets/images/temp.jpg" alt="none image">
           <div class="content">
-            <div class="category">{{post.category}}</div>
-            <span class="title">{{post.title}}</span>
+            <div class="title">
+              <div class="category">{{post.category}}</div>
+              <span class="title">{{post.title}}</span>
+            </div>
             <span class="content">{{post.content}}</span>
             <span class="tag">{{post.tag}}</span>
           </div>
@@ -55,7 +57,7 @@ export default {
   data () {
     return {
       List: [],
-      page: 1,
+      page: this.$route.query.page ? parseInt(this.$route.query.page) : 1,
       tmp: {
         title: '',
         category: ''
@@ -97,7 +99,7 @@ export default {
             }
             this.List.push(i)
           }
-          this.endpage = res.data.count / 20
+          this.endpage = parseInt(res.data.count / 20)
           this.endpage += (res.data.count % 20) ? 1 : 0
         })
         .catch((err) => {
@@ -110,18 +112,18 @@ export default {
         })
     },
     getPage (n) {
-      if (this.currentpage !== n) {
-        this.currentpage = n
-        this.getUserList()
+      if (this.page !== n) {
+        this.page = n
+        this.$router.push({name: this.$route.name, query: {page: n}})
+        this.getList()
       }
     },
     getNextBeforePage (n) {
-      if (n === '0' && this.currentpage > 1) {
-        this.currentpage--
+      if (n === '0' && this.page > 1) {
+        this.getPage(this.page - 1)
       } else if (n === '1' && this.currentpage < this.endpage) {
-        this.currentpage++
+        this.getPage(this.page + 1)
       }
-      this.getUserList()
     },
     getRecommendPost (n) {
       this.$router.push({path: this.$route.path + '/' + n})
@@ -147,7 +149,7 @@ export default {
 .cont_inner li div.content{
   display: flex;
   flex-direction: column;
-  margin: 10px 10px;
+  padding: 10px 10px;
   width: 100%;
   height: 100%;
   position: relative;
@@ -157,16 +159,19 @@ export default {
   height: 128px;
   border: solid 1px #ddd;
 }
+.cont_inner li div.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .cont_inner li span.title {
   font-weight: bold;
-  position: absolute;
-  top: 10px;
-  left: 90px;
+  margin-left: 10px;
 }
 .cont_inner li span.content {
   position: absolute;
   top: 40px;
-  width: 70%;
+  width: 80%;
   margin-top: 10px;
 }
 .cont_inner li span.tag {
@@ -174,8 +179,6 @@ export default {
   bottom: 10px;
 }
 .cont_inner li div.category {
-  position: absolute;
-  top: 2px;
   color:#FFF;
   border: solid 1px #aaa;
   border-radius: 5px;
