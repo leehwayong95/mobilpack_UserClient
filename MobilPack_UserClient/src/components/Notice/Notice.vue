@@ -71,6 +71,7 @@ export default {
       Number: 20,
       language: '',
       title: '',
+      fixtitle: '',
       start_page: '',
       end_page: '',
       paging: function () {
@@ -83,9 +84,11 @@ export default {
   },
   methods: {
     search () {
+      this.fixtitle = this.title
+      this.page = 1
       this.$axios.get('http://localhost:9000//api/search', {
         params: {
-          Currentpage: this.page,
+          Currentpage: 1,
           Number: this.Number,
           title: this.title
         }})
@@ -106,7 +109,7 @@ export default {
         params: {
           Currentpage: this.page,
           Number: this.Number,
-          title: this.title
+          title: this.fixtitle
         }})
         .then((res) => {
           this.items = res.data.result
@@ -133,7 +136,6 @@ export default {
       if (this.page !== n) {
         this.page = n
         this.pagingMove()
-        this.$router.push({name: this.$route.name, query: {page: n}})
       }
     }
   }
