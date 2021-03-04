@@ -1,7 +1,8 @@
 <template>
   <div id='center'>
     <div class="title">
-      <h1>| 문의목록</h1>
+      <h1>| 문의사항</h1>
+      <h3>HOME > 문의사항</h3>
     </div>
     <div class="search">
       <ul>

@@ -2,6 +2,7 @@
     <div id='center'>
        <span class="title">
        <h1>| 공지사항</h1>
+       <h3>HOME > 공지사항</h3>
     </span>
     <div class="search">
       <ul>

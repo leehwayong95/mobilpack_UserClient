@@ -2,7 +2,7 @@
     <div id=center>
     <span class="title">
     <h1>| 공지사항 상세</h1>
-    <h3>공지사항 > 공지사항상세</h3>
+    <h3>HOME > 공지사항 > 공지사항상세</h3>
     </span>
     <section class="cont_inner">
         <table style="margin-top: 30px;">

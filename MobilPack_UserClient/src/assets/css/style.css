@@ -72,7 +72,7 @@ select {
   top: 100px;
   width: 100%;
   height: calc(100% - 100px);
-  padding: 0 60px 30px 60px;
+  padding: 0 15% 30px 15%;
   background: #eee;
   overflow: auto;
 }
@@ -301,8 +301,8 @@ select {
 #center > .cont_inner > button {
   display: block;
   position: absolute;
-  right:30px;
-  top:30px;
+  right: 30px;
+  top: 30px;
   width: 100px;
   height: 30px;
 }
