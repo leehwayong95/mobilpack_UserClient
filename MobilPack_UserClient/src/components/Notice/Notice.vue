@@ -47,7 +47,8 @@
         <div class="paging">
         <a class="pagingFirst"/>
           <ul v-for="(n,index) in paging()" :key="index" href="javascript:;" >
-            <li @click="ckpage(`${n}`)">{{n}}</li>
+            <li v-if="page !== n" @click="ckpage(n)">{{n}}</li>
+            <li v-else class="Currentpage" >{{n}}</li>
           </ul>
         <a class="pagingLast"/>
       </div>
@@ -58,21 +59,11 @@
 <script>
 export default {
   mounted () {
-    this.$axios.get('http://localhost:9000//api/search', {params: { Currentpage: 1, Number: this.Number, title: this.title }})
-      .then((res) => {
-        this.items = res.data.result
-        this.end_page = res.data.count / this.Number // count:list 수 를 20으로 나누어서 몇 페이지 필요한지 계산
-        if (res.data.count % this.Number >= 1) {
-          this.end_page = this.end_page + 1
-        } else {
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.search()
   },
   data () {
     return {
+      page: this.$route.query.page ? parseInt(this.$route.query.page) : 1,
       items: [],
       listtotal: '',
       Currentpage: 1,
@@ -93,14 +84,14 @@ export default {
     search () {
       this.$axios.get('http://localhost:9000//api/search', {
         params: {
-          Currentpage: this.Currentpage,
+          Currentpage: this.page,
           Number: this.Number,
           title: this.title
         }})
         .then((res) => {
           this.items = res.data.result
           this.listtotal = res.data.count
-          this.end_page = res.data.count / this.Number
+          this.end_page = res.data.count / this.Number // count:list 수 를 20으로 나누어서 몇 페이지 필요한지 계산
           if (res.data.count % this.Number > 0) {
             this.end_page = this.end_page + 1
           } else {
@@ -120,9 +111,10 @@ export default {
       this.$router.push('/noticeregistration')
     },
     ckpage (n) {
-      if (this.Currentpage !== n) {
-        this.Currentpage = n
+      if (this.page !== n) {
+        this.page = n
         this.search()
+        this.$router.push({name: this.$route.name, query: {page: n}})
       }
     }
   }
@@ -159,5 +151,9 @@ export default {
     height: calc(100%);
     padding: 10px 20px 200px 20px;
     background: #ffffff
+}
+.Currentpage {
+  background-color: #3e61dc;
+  color: #fff;
 }
 </style>
