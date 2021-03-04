@@ -1,8 +1,8 @@
 <template>
     <div id=center>
     <span class="title">
-    <h1>HOME</h1>
-    <h2>공지사항 > 공지 사항 상세</h2>
+    <h1>| 공지사항 상세</h1>
+    <h3>공지사항 > 공지사항상세</h3>
     </span>
     <section class="cont_inner">
         <table style="margin-top: 30px;">
