@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr v-for="(p,idx) in items" :key="idx" v-show="Currentpage" @click="rowClick(p.postindex)">
-            <td>{{(20*(Currentpage-1)+(idx+1))}}</td>
+            <td>{{(20*(page-1)+(idx+1))}}</td>
             <td class="row" v-if="'1'===p.topsetting">
               <div class="imp">
                 중요
@@ -47,7 +47,8 @@
         <div class="paging">
         <a class="pagingFirst"/>
           <ul v-for="(n,index) in paging()" :key="index" href="javascript:;" >
-            <li @click="ckpage(`${n}`)">{{n}}</li>
+            <li v-if="page !== n" @click="ckpage(n)">{{n}}</li>
+            <li v-else class="active">{{n}}</li>
           </ul>
         <a class="pagingLast"/>
       </div>
@@ -58,7 +59,12 @@
 <script>
 export default {
   mounted () {
-    this.$axios.get('http://localhost:9000//api/search', {params: { Currentpage: 1, Number: this.Number, title: this.title }})
+    this.$axios.get('http://localhost:9000//api/search', {
+      params: {
+        Currentpage: 1,
+        Number: this.Number,
+        title: this.title
+      }})
       .then((res) => {
         console.log(res)
         console.log(res.data.count)
@@ -75,6 +81,7 @@ export default {
   },
   data () {
     return {
+      page: this.$route.query.page ? parseInt(this.$route.query.page) : 1,
       items: [],
       listtotal: '',
       Currentpage: 1,
@@ -95,7 +102,7 @@ export default {
     search () {
       this.$axios.get('http://localhost:9000//api/search', {
         params: {
-          Currentpage: this.Currentpage,
+          Currentpage: this.page,
           Number: this.Number,
           title: this.title
         }})
@@ -103,7 +110,27 @@ export default {
           this.items = res.data.result
           this.listtotal = res.data.count
           this.end_page = res.data.count / this.Number
-          if (res.data.count % this.Number >= 0) {
+          if (res.data.count % this.Number > 0) {
+            this.end_page = this.end_page + 1
+          } else {
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    pagingMove () {
+      this.$axios.get('http://localhost:9000//api/search', {
+        params: {
+          Currentpage: this.page,
+          Number: this.Number,
+          title: this.title
+        }})
+        .then((res) => {
+          this.items = res.data.result
+          this.listtotal = res.data.count
+          this.end_page = res.data.count / this.Number
+          if (res.data.count % this.Number >= 1) {
             this.end_page = this.end_page + 1
           } else {
           }
@@ -122,9 +149,10 @@ export default {
       this.$router.push('/noticeregistration')
     },
     ckpage (n) {
-      if (this.Currentpage !== n) {
-        this.Currentpage = n
-        this.search()
+      if (this.page !== n) {
+        this.page = n
+        this.pagingMove()
+        this.$router.push({name: this.$route.name, query: {page: n}})
       }
     }
   }
