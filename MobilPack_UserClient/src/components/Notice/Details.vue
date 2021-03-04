@@ -55,31 +55,7 @@
 export default
 {
   mounted () {
-    // 조회수 증가시키기
-    this.$axios.get('http://localhost:9000/api/userplusviewcount', {params: {postindex: this.$route.query.index}})
-      .then(res => {
-        if (res.data === 'ok') {
-        } else {
-          console.log('조회수 오류 다시 설정 해주세요')
-        }
-      })
-    // 게시글 가져오기
-    this.$axios.get('http://localhost:9000/api/detail', {params: {postindex: this.$route.query.index}})
-      .then((res) => {
-        this.items = res.data
-        this.items.createat = this.items.createat.substring(0, 16)
-        if (this.items.updateat) {
-          this.items.updateat = this.items.updateat.substring(0, 16)
-        }
-        this.postindex = this.$route.query.index
-        this.hypercontent = res.data.content
-        this.hypercontent = this.test(this.hypercontent)
-        this.testcontent = res.data.content
-        this.result = this.testcontent.match(this.hyperlink)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getNotice()
   },
   data () {
     return {
@@ -94,6 +70,31 @@ export default
     }
   },
   methods: {
+    getNotice () {
+      this.$axios.get('http://localhost:9000/api/userplusviewcount', {params: {postindex: this.$route.query.index}})
+        .then(res => {
+          if (res.data === 'ok') {
+            this.$axios.get('http://localhost:9000/api/detail', {params: {postindex: this.$route.query.index}})
+              .then((res) => {
+                this.items = res.data
+                this.items.createat = this.items.createat.substring(0, 16)
+                if (this.items.updateat) {
+                  this.items.updateat = this.items.updateat.substring(0, 16)
+                }
+                this.postindex = this.$route.query.index
+                this.hypercontent = res.data.content
+                this.hypercontent = this.test(this.hypercontent)
+                this.testcontent = res.data.content
+                this.result = this.testcontent.match(this.hyperlink)
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+          } else {
+            console.log('조회수 오류 다시 설정 해주세요')
+          }
+        })
+    },
     test (str) {
       return str.replaceAll('\n', '<br/>')
     },
