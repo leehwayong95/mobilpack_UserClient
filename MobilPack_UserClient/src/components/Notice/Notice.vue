@@ -60,26 +60,7 @@
 <script>
 export default {
   mounted () {
-    this.$axios.get('http://localhost:9000//api/search', {
-      params: {
-        Currentpage: 1,
-        Number: this.Number,
-        title: this.title
-      }})
-      .then((res) => {
-        console.log(res)
-        console.log(res.data.count)
-        this.items = res.data.result
-        this.listtotal = res.data.count
-        this.end_page = res.data.count / this.Number // count:list 수 를 20으로 나누어서 몇 페이지 필요한지 계산
-        if (res.data.count % this.Number >= 1) {
-          this.end_page = this.end_page + 1
-        } else {
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.search()
   },
   data () {
     return {
@@ -114,7 +95,6 @@ export default {
           this.end_page = res.data.count / this.Number
           if (res.data.count % this.Number > 0) {
             this.end_page = this.end_page + 1
-          } else {
           }
         })
         .catch((err) => {
@@ -134,7 +114,6 @@ export default {
           this.end_page = res.data.count / this.Number
           if (res.data.count % this.Number >= 1) {
             this.end_page = this.end_page + 1
-          } else {
           }
         })
         .catch((err) => {
@@ -191,5 +170,9 @@ export default {
     height: calc(100%);
     padding: 10px 20px 200px 20px;
     background: #ffffff
+}
+.Currentpage {
+  background-color: #3e61dc;
+  color: #fff;
 }
 </style>
