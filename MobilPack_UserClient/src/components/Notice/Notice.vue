@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr v-for="(p,idx) in items" :key="idx" v-show="Currentpage" @click="rowClick(p.postindex)">
-            <td>{{(20*(page-1)+(idx+1))}}</td>
+            <td>{{(listtotal+1)-(20*(page-1)+(idx+1))}}</td>
             <td class="row" v-if="'1'===p.topsetting">
               <div class="imp">
                 중요
@@ -69,6 +69,7 @@ export default {
         console.log(res)
         console.log(res.data.count)
         this.items = res.data.result
+        this.listtotal = res.data.count
         this.end_page = res.data.count / this.Number // count:list 수 를 20으로 나누어서 몇 페이지 필요한지 계산
         if (res.data.count % this.Number >= 1) {
           this.end_page = this.end_page + 1
