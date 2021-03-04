@@ -1,7 +1,7 @@
 <template>
     <div id='center'>
        <span class="title">
-       <h1>| HOME</h1>
+       <h1>| 공지사항</h1>
     </span>
     <div class="search">
       <ul>
