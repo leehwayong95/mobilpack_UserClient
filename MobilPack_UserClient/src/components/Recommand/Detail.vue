@@ -2,6 +2,7 @@
   <div id="center">
     <div class="title">
       <h1>| 추천장소 상세</h1>
+      <h3>HOME > 추천장소 > 추천장소상세</h3>
     </div>
     <div class="cont_inner">
       <table>

@@ -2,7 +2,7 @@
   <div id="center">
     <div class="title">
       <h1>| 문의등록</h1>
-      <h3>home > 문의목록 > 문의등록</h3>
+      <h3>HOME > 문의목록 > 문의등록</h3>
     </div>
     <div class="cont_inner">
       <table>

@@ -1,7 +1,8 @@
 <template>
   <div id="center">
     <div class="title">
-      <h1>| 내 정보 변경</h1>
+      <h1>| 설정</h1>
+      <h3>HOME > 설정</h3>
     </div>
     <div class="cont_inner">
       <table>

@@ -1,7 +1,8 @@
 <template>
   <div id="center">
     <div class="title">
-        <h1>| 추천장소</h1>
+      <h1>| 추천장소</h1>
+      <h3>HOME > 추천장소</h3>
     </div>
     <div class="search">
       <ul>
