@@ -132,7 +132,12 @@ export default {
           this.post.phone = this.post.phone.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, '$1-$2-$3')
           /* 휴무일, 운영일 요일 구하기 */
           let runningDateBit = parseInt(res.data.post.openday, 10).toString(2).split('')
+          /* 2진수 7자리 비트 맞추기 */
+          for (let index = runningDateBit.length; index < 7; index++) {
+            runningDateBit.unshift('0')
+          }
           this.pausedate = []
+          console.log(runningDateBit)
           for (let bit of runningDateBit) {
             this.pausedate.push((bit === '1' ? '0' : '1'))
           }
