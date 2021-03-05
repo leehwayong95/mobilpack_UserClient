@@ -200,6 +200,7 @@ export default {
         .then((res) => {
           if (res.data.status === true) {
             this.getPost()
+            this.review = ''
           }
         })
         .catch((err) => {

@@ -69,7 +69,8 @@ export default {
 }
 .srch_box {
      /* flex, justify-content, align-items:공부 필요합니다 */
-    position: relative;
+    position: fixed;
+    top: 0;
     width: 100%;
     padding: 20px 60px;
     background: #2c3a52;

@@ -16,4 +16,7 @@ export default {
   @import url('./assets/css/content');
   @import url('./assets/css/common');
   @import url('./assets/css/style');
+body {
+  background: #eee;
+}
 </style>

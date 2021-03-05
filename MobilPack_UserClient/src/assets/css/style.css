@@ -67,12 +67,14 @@ select {
 }
 /* 요한 가운데 컨텐츠 영역 */
 #center {
-  position: fixed;
+  position: relative;
   left: 0;
   top: 100px;
   width: 100%;
   height: calc(100% - 100px);
-  padding: 0 15% 30px 15%;
+  padding: 0 10px 30px 10px;
+  margin: 0 auto;
+  max-width: 1200px;
   background: #eee;
   overflow: auto;
 }
