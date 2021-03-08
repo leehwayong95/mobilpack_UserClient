@@ -33,14 +33,14 @@
         <tbody>
           <tr v-for="(p,idx) in items" :key="idx" v-show="Currentpage" @click="rowClick(p.postindex)">
             <td>{{(listtotal+1)-(20*(page-1)+(idx+1))}}</td>
-            <td class="row" v-if="'1'===p.topsetting">
-              <div class="imp">
+            <td id="title" v-if="'1'===p.topsetting">
+              <span class="point">
                 중요
-              </div>
+              </span>
               {{ p.title }}
             </td>
-            <td v-else>{{ p.title }}</td>
-            <td>{{ p.createat }}</td>
+            <td v-else id="title">{{ p.title }}</td>
+            <td>{{ p.createat.substring(0,16) }}</td>
             <td>{{ p.viewcount }}</td>
           </tr>
         </tbody>
@@ -157,13 +157,6 @@ export default {
     width: 100%;
     height: 50px;
 }
-.imp { /* 제목 앞에 붙는 중요빨간 표지 */
-  width: 30px;
-  height: 20px;
-  background-color: red;
-  color: #fff;
-  float: left; /* 방향 왼쪽으로 이동 */
-}
 #content {
     position: fixed;
     left: 40px;
@@ -176,5 +169,21 @@ export default {
 .Currentpage {
   background-color: #3e61dc;
   color: #fff;
+}
+#center table td#title {
+  text-align: left;
+}
+.point {
+    background: rgb(245 44 44);
+    font-size: 15px;
+    height: 25px;
+    width: 40px;
+    padding: 2px;
+    text-align: center;
+    justify-content: center; /* dispaly로flex 를 지정하였고 이친구는 flex 내용물 들을 조정하는 문구입니다 */
+    display: inline-flex;  /* inline 은 세로로 공간파일이 생긴다고 생각하면 됨 */
+    border-radius: 5px;
+    margin-right: 10px;
+    color:aliceblue;
 }
 </style>
