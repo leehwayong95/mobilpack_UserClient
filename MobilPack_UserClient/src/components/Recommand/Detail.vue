@@ -50,7 +50,7 @@
         </tr>
         <tr>
           <td colspan='6' class="content">
-            <span  v-html="post.content"></span>
+            <span  v-text="post.content" style="white-space:pre-line;"></span>
             <div v-for="i of files" :key="i" >
               <img :src="i" alt="img" style="width: 20%;"/>
             </div>
