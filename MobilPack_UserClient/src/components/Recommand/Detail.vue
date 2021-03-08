@@ -46,6 +46,9 @@
           </td>
         </tr>
         <tr>
+          <td style="border-bottom: none; padding: 20px" colspan="6" v-text="post.tag"></td>
+        </tr>
+        <tr>
           <td colspan='6' class="content">
             <span  v-html="post.content"></span>
             <div v-for="i of files" :key="i" >
@@ -132,6 +135,10 @@ export default {
           this.post.phone = this.post.phone.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, '$1-$2-$3')
           /* 휴무일, 운영일 요일 구하기 */
           let runningDateBit = parseInt(res.data.post.openday, 10).toString(2).split('')
+          /* 2진수 7자리 비트 맞추기 */
+          for (let index = runningDateBit.length; index < 7; index++) {
+            runningDateBit.unshift('0')
+          }
           this.pausedate = []
           for (let bit of runningDateBit) {
             this.pausedate.push((bit === '1' ? '0' : '1'))
@@ -150,11 +157,7 @@ export default {
     getRunningDate (runningDateBit) {
       let result = []
       let countinueDay = false
-      if (runningDateBit.length !== 7) {
-        for (let i = runningDateBit.length; i < 7; i++) {
-          runningDateBit.unshift('0')
-        }
-      }
+      /* 연속된 요일인지 아닌지 추가 */
       for (let index in runningDateBit) {
         if (countinueDay && runningDateBit[index] === '1') {
           if (result[result.length - 1] !== '~') {
@@ -176,10 +179,18 @@ export default {
           result.push(', ')
         }
       }
+      /* 마지막 작업이 , 이면 제거하고 역순으로 리턴 */
       if (result[result.length - 1] === ', ') {
         result = result.splice(0, result.length - 1).reverse()
       } else {
         result = result.reverse()
+      }
+      /* 단일 요일일 경우 풀네임으로 적용 */
+      console.log(result.length)
+      for (let i in result) {
+        if (result[parseInt(i) + 1] === ', ' || (parseInt(i) === result.length - 1 && result[parseInt(i) - 1] === ', ')) {
+          result[i] = result[i] + '요일'
+        }
       }
       return result
     },
@@ -200,6 +211,7 @@ export default {
         .then((res) => {
           if (res.data.status === true) {
             this.getPost()
+            this.review = ''
           }
         })
         .catch((err) => {
