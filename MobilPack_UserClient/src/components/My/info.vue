@@ -83,7 +83,6 @@ export default {
             } else { // 아이디를 수정하지 않았을 때
               // main으로 가는게 맞는거 같은데 token 정보가 바뀌지않아서 다시 로그인
               this.$cookie.set('name', this.name) // 쿠키 변경해도 새로고침이 필요. 조금더 고민
-              this.$router.push('/')
             }
           })
           .catch((err) => { // 토큰 expired 일 때
@@ -202,7 +201,10 @@ export default {
 #center > .cont_inner {
   padding: 0 100px;
   background-image: url('../../assets/images/zzzzz.png');
+  background-size: 100%;
+  background-position-y: 80px;
   background-repeat: no-repeat;
+  min-height: 700px;
 }
 #center table{
   margin-top: 30px !important;
@@ -220,7 +222,7 @@ table td input{
   width: 30%;
   margin-right: 10px;
 }
-button{
+.cont_inner button{
   position: relative !important;
   width: 100px;
   height: 30px;
