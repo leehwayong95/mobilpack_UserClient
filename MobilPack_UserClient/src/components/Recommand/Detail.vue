@@ -207,21 +207,25 @@ export default {
       return result[parseInt(index)]
     },
     putUserReview () {
-      this.$axios.put('http://localhost:9000/api/post/' + this.$route.params.index + '?content=' + this.review)
-        .then((res) => {
-          if (res.data.status === true) {
-            this.getPost()
-            this.review = ''
-          }
-        })
-        .catch((err) => {
-          if (err.response.status === 401) {
-            alert('로그인이 만료되었습니다. 다시 로그인해주세요')
-            this.$cookie.delete('Authorization')
-            this.$cookie.delete('user_name')
-            this.$router.push('/')
-          }
-        })
+      if (this.review !== '') {
+        this.$axios.put('http://localhost:9000/api/post/' + this.$route.params.index + '?content=' + this.review)
+          .then((res) => {
+            if (res.data.status === true) {
+              this.getPost()
+              this.review = ''
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              alert('로그인이 만료되었습니다. 다시 로그인해주세요')
+              this.$cookie.delete('Authorization')
+              this.$cookie.delete('user_name')
+              this.$router.push('/')
+            }
+          })
+      } else {
+        alert('내용을 입력해주세요.')
+      }
     },
     onMarkerLoaded (vue) { /** 마커를 이용하기 위해 마커 객체 생성 */
       this.marker = vue.marker

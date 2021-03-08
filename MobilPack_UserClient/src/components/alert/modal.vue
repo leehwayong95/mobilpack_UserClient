@@ -54,6 +54,7 @@ div.modal_button_wrap input {
   bottom: 10px;
   left: 50%;
   transform: translate(-50%, 0);
+  outline: none;
 }
 </style>
 

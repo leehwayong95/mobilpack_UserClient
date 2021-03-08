@@ -73,6 +73,7 @@ div.modal_button_wrap input{
   position: absolute;
   bottom: 10px;
   left: 50%;
+  outline: none;
 }
 p.ConfirmPwAlert {
   position: absolute;
