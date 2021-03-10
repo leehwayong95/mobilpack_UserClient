@@ -105,7 +105,7 @@ export default {
         this.$axios.post('http://localhost:9000/api/qna/', {
           category: this.category,
           title: this.title,
-          content: this.convertHTML(this.content)
+          content: this.convertHTML(this.content.trim()) // 여기에 trim()을 추가해서 여백 제거
         })
           .then((res) => {
             alert('등록하였습니다.')
