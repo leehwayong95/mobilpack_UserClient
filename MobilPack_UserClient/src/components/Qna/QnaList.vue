@@ -65,8 +65,7 @@
             <td v-if="post.category == 1">이용</td>
             <td v-else-if="post.category == 2">오류</td>
             <td v-else-if="post.category == 3">기타</td>
-          <td class="title" v-if="post.title.length > 35">{{post.title.substr(0,35)}}...</td>
-          <td class="title" v-else>{{post.title}}</td>
+          <td class="title">{{post.title}}</td>
           <td>{{post.createat.split(" ")[0]}} {{post.createat.split(" ")[1].substr(0, 5)}}</td>
             <td v-if="post.replydate == null">답변대기</td>
             <td v-else style="color: blue;">답변완료</td>
@@ -92,6 +91,9 @@
 <style scoped>
 #center td.title {
   text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 /* 달력 선택 */
 input[type="date"] {/* 날짜를 고르는 버튼 구역에 따라 달력이 나오게 해줌 (이 표시가 없어지면 달력이 한쪽으로만 표출됨)*/
