@@ -93,6 +93,26 @@
 #center td.title {
   text-align: left;
 }
+/* 달력 선택 */
+input[type="date"] {/* 날짜를 고르는 버튼 구역에 따라 달력이 나오게 해줌 (이 표시가 없어지면 달력이 한쪽으로만 표출됨)*/
+  position: relative;
+}
+input[type="date"]:after {/* 날짜선택구간 옆에 ▼표시를 생성함 ,버튼적용됨 */
+  content: "\25BC";
+  color: #555;
+  padding: 0 5px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {/* 달력을 표출 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent
+}
 </style>
 
 <script>
