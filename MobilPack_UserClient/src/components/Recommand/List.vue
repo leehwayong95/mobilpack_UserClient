@@ -85,15 +85,16 @@ export default {
       this.List = []
       this.getList()
     },
-    getList () {
+    getList (n) {
       this.$axios.get('http://localhost:9000/api/post/search', {
         params: {
-          page: this.page,
+          page: n === undefined ? this.page : n,
           name: this.Search.title,
           count: 20,
           category: this.Search.category
         }})
         .then((res) => {
+          this.List = []
           for (let i of res.data.result) {
             if (i.content.length > 120) {
               i.content = i.content.substr(0, 120) + '...'
@@ -112,11 +113,11 @@ export default {
           }
         })
     },
-    getPage (n) {
+    async getPage (n) {
       if (this.page !== n) {
+        await this.getList(n)
         this.page = n
         this.$router.push({name: this.$route.name, query: {page: n}})
-        this.getList()
       }
     },
     getNextBeforePage (n) {
