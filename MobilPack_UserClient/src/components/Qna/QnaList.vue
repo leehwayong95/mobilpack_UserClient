@@ -22,9 +22,9 @@
         <li class ="date">
           <span>문의 일시</span>
           <p class="date">
-            <input type="date" v-model="tmp.min">
+            <input type="date" @keydown.prevent = "handlekeyDown" v-model="tmp.min">
             <i>~</i>
-            <input type="date" v-model="tmp.max">
+            <input type="date" @keydown.prevent = "handlekeyDown" v-model="tmp.max">
           </p>
         </li>
         <li>
@@ -204,6 +204,9 @@ export default {
             this.$router.push('/')
           }
         })
+    },
+    handlekeyDown (e) {
+      e.preventDefault()
     },
     writeQna () {
       this.$router.push('/write')
