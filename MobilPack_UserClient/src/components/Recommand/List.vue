@@ -157,8 +157,9 @@ export default {
   position: relative;
 }
 .cont_inner li img {
-  width: 128px;
+  width: 150px;
   height: 128px;
+  overflow: hidden;
   border: solid 1px #ddd;
 }
 .cont_inner li div.title {
