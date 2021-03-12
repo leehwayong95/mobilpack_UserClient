@@ -82,7 +82,7 @@ export default
                   this.items.updateat = this.items.updateat.substring(0, 16)
                 }
                 this.postindex = this.$route.query.index
-                this.hypercontent = res.data.content
+                this.hypercontent = this.convertHTML(res.data.content)
                 this.hypercontent = this.test(this.hypercontent)
                 this.testcontent = res.data.content
                 this.result = this.testcontent.match(this.hyperlink)
@@ -97,6 +97,12 @@ export default
     },
     test (str) {
       return str.replaceAll('\n', '<br/>')
+    },
+    convertHTML (content) {
+      var regURL = new RegExp(`(http|https|ftp|telnet|news|irc)://([-/.a-zA-Z0-9_~#%$?&=:200-377()]+)`, 'gi')
+      return content
+        .replace(regURL, `<a href='$1://$2' target='_blank'>$1://$2</a>`)
+        .replace(/(?:\r\n|\r|\n)/g, '<br />')
     },
     back () {
       this.$router.push('/notice')
@@ -128,7 +134,7 @@ export default
     border-radius: 5px;
 }
 .scroll {
-  overflow: scroll;
+  overflow: auto;
   background: #fff;
 }
 </style>

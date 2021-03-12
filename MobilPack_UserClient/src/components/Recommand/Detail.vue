@@ -51,8 +51,8 @@
         <tr>
           <td colspan='6' class="content">
             <span  v-text="post.content" style="white-space:pre-line;"></span>
-            <div v-for="i of files" :key="i" >
-              <img :src="i" alt="img" style="width: 20%;"/>
+            <div class="img">
+              <img v-for="i of files" :key="i" :src="i" alt="img" style="width: 30%;"/>
             </div>
           </td>
         </tr>
@@ -305,5 +305,10 @@ div.comment span.date {
 div#vue-naver-maps {
   width: 100%;
   height: 100%;
+}
+div.img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
