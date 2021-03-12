@@ -67,7 +67,8 @@
           <ul>
             <li v-for="(i,index) in comments" :key="index">
               <div class="comment">
-                <span class="name">{{i.name}}</span>
+                <span class="name" v-if="i.name">{{i.name}}</span>
+                <span class="name" v-else>삭제된 회원</span>
                 <span class="content">{{i.content}}</span>
                 <span class="date">
                   {{i.createat.split(' ')[0]}} {{i.createat.split(' ')[1].split(':')[0]}}:{{i.createat.split(' ')[1].split(':')[1]}}
@@ -186,12 +187,11 @@ export default {
         result = result.reverse()
       }
       /* 단일 요일일 경우 풀네임으로 적용 */
-      console.log(result)
-      if (result.length === 1) { // 단일(하루)운영일 일경우
-        result.push('요일')
+      if (result.length === 1) {
+        result[result.length - 1] += '요일'
       } else {
-        for (let i in result) { // 이외
-          if (result[parseInt(i) + 1] === ', ' || (parseInt(i) === result.length - 1 && result[parseInt(i) - 1] === ', ')) {
+        for (let i in result) {
+          if ((result[parseInt(i) + 1] === ', ' && result[parseInt(i) - 1] !== '~') || (parseInt(i) === result.length - 1 && result[parseInt(i) - 1] === ', ')) {
             result[i] = result[i] + '요일'
           }
         }
